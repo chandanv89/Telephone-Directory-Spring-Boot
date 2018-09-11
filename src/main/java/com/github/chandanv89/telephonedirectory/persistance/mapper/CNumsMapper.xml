@@ -1,0 +1,16 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ContactNumber">
+
+    <resultMap id="contactNumber" type="com.github.chandanv89.telephonedirectory.model.ContactNumber">
+        <result property="number" column="C_NUMBER"/>
+        <result property="category" column="CATEGORY"/>
+        <result property="isPrimary" column="IS_PRIMARY"/>
+    </resultMap>
+
+    <select id="getContactNumbersByContactId" parameterType="String" resultMap="contactNumber" >
+        SELECT C_NUMBER, CATEGORY, IS_PRIMARY FROM C_NUMS WHERE C_ID = #{contactId}
+    </select>
+
+</mapper>

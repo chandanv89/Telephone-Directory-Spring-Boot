@@ -1,0 +1,65 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.github.chandanv89.telephonedirectory.persistance.mapper.ContactsMapper">
+
+    <resultMap id="contact" type="com.github.chandanv89.telephonedirectory.model.Contact">
+        <result property="id" column="ID"/>
+        <result property="fullName" column="FULL_NAME"/>
+        <result property="firstName" column="FIRST_NAME"/>
+        <result property="lastName" column="LAST_NAME"/>
+        <!--<collection property="emails" ofType="Email">
+            <result property="id" column="EMAIL_ID"/>
+            <result property="category" column="CATEGORY"/>
+            <result property="isPrimary" column="IS_PRIMARY"/>
+        </collection>-->
+    </resultMap>
+
+    <select id="getAllContacts" resultMap="contact">
+        SELECT ID, FULL_NAME, FIRST_NAME, LAST_NAME
+        FROM CONTACTS
+    </select>
+
+    <select id="getContactById" parameterType="String" resultMap="contact">
+        SELECT ID, FULL_NAME, FIRST_NAME, LAST_NAME
+        FROM CONTACTS
+        WHERE ID=${id}
+    </select>
+
+    <insert id="addContact" parameterType="map" useGeneratedKeys="true">
+        INSERT INTO CONTACTS(FULL_NAME, FIRST_NAME, LAST_NAME)
+        VALUES(${contact.fullName}, ${contact.firstName}, ${contact.lastName})
+    </insert>
+
+    <insert id="addContactList" parameterType="java.util.List">
+        INSERT ALL
+        <foreach collection="contacts" item="c" index="index">
+            INTO CONTACTS (full_name, first_name, last_name)
+            VALUES (${c.fullName},${c.firstName}, ${c.lastName})
+        </foreach>
+        SELECT * FROM dual
+    </insert>
+
+    <insert id="addContacts" parameterType="java.util.List">
+        INSERT INTO CONTACTS (full_name, first_name, last_name) VALUES
+        <foreach collection="list" item="element" index="index" open="(" separator="),(" close=")">
+            #{element.fullName},
+            #{element.firstName},
+            #{element.lastName}
+        </foreach>
+    </insert>
+
+    <delete id="deleteContactById" parameterType="String">
+        DELETE FROM CONTACTS
+        WHERE ID = ${id}
+    </delete>
+
+    <update id="updateContactById" parameterType="map">
+        UPDATE CONTACTS
+        SET FULL_NAME = ${contact.fullName},
+        FIRST_NAME = ${contact.firstName},
+        LAST_NAME = ${contact.lastName}
+        WHERE ID = ${contact.id}
+    </update>
+
+</mapper>
