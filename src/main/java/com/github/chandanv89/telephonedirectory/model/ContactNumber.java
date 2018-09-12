@@ -7,6 +7,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * The type Contact number.
  */
 public class ContactNumber {
+    @JsonProperty("id")
+    private String id;
+
     @JsonProperty("number")
     private String number;
 
@@ -50,7 +53,6 @@ public class ContactNumber {
         this.isPrimary = isPrimary;
     }
 
-
     /**
      * Instantiates a new Contact number.
      *
@@ -63,6 +65,24 @@ public class ContactNumber {
         this.isPrimary = isPrimary;
         this.category = ContactCategory.OTHERS.fromString(category);
 
+    }
+
+    /**
+     * Gets id.
+     *
+     * @return the id
+     */
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * Sets id.
+     *
+     * @param id the id
+     */
+    public void setId(String id) {
+        this.id = id;
     }
 
     /**
@@ -122,7 +142,8 @@ public class ContactNumber {
     @Override
     public String toString() {
         return "ContactNumber{" +
-                "number='" + number + '\'' +
+                "id='" + id + '\'' +
+                ", number='" + number + '\'' +
                 ", category=" + category +
                 ", isPrimary=" + isPrimary +
                 '}';

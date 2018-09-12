@@ -1,4 +1,4 @@
-package com.github.chandanv89.telephonedirectory.persistance.dao;
+package com.github.chandanv89.telephonedirectory.persistance;
 
 import com.github.chandanv89.telephonedirectory.model.Contact;
 import com.github.chandanv89.telephonedirectory.persistance.mapper.ContactsMapper;
@@ -11,7 +11,7 @@ import java.util.List;
  * The type Contacts dao.
  */
 @Component
-public class ContactsDao implements ContactsMapper {
+public class ContactsDataService implements ContactsMapper {
     @Autowired
     private ContactsMapper contactsMapper;
 
