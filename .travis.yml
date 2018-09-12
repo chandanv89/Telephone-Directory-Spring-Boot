@@ -1,0 +1,12 @@
+language: java
+sudo: false
+
+addons:
+  apt:
+    packages:
+    - oracle-java8-installer
+
+branches:
+  only:
+  - master
+  - develop.2018.09
