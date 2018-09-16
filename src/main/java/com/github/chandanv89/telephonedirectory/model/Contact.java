@@ -11,6 +11,8 @@ import java.util.UUID;
  * The type Contact.
  */
 public class Contact {
+    private static final long serialVersionUID = 4492014110145565010L;
+
     @JsonIgnore
     @JsonProperty("id")
     private String id;
@@ -29,6 +31,18 @@ public class Contact {
 
     @JsonProperty("emails")
     private List<Email> emails;
+
+    @JsonIgnore
+    @JsonProperty("createdOn")
+    private String createdOn;
+
+    @JsonIgnore
+    @JsonProperty("updatedOn")
+    private String updatedOn;
+
+    @JsonIgnore
+    @JsonProperty("isDeleted")
+    private String isDeleted;
 
     /**
      * Instantiates a new Contact.
@@ -50,6 +64,16 @@ public class Contact {
         setNameComponents();
     }
 
+    public Contact(Contact contact){
+        this.firstName = contact.getFirstName();
+        this.lastName = contact.getLastName();
+        this.fullName = contact.getFullName();
+        this.contactNumbers = contact.getContactNumbers();
+        this.emails = contact.getEmails();
+
+        setNameComponents();
+    }
+
     /**
      * Gets id.
      *
@@ -57,6 +81,15 @@ public class Contact {
      */
     public String getId() {
         return id;
+    }
+
+    /**
+     * Sets id.
+     *
+     * @param id the id
+     */
+    public void setId(String id) {
+        this.id = id;
     }
 
     /**
@@ -150,15 +183,72 @@ public class Contact {
         this.emails = emails;
     }
 
+    /**
+     * Gets created on.
+     *
+     * @return the created on
+     */
+    public String getCreatedOn() {
+        return createdOn;
+    }
+
+    /**
+     * Sets created on.
+     *
+     * @param createdOn the created on
+     */
+    public void setCreatedOn(String createdOn) {
+        this.createdOn = createdOn;
+    }
+
+    /**
+     * Gets updated on.
+     *
+     * @return the updated on
+     */
+    public String getUpdatedOn() {
+        return updatedOn;
+    }
+
+    /**
+     * Sets updated on.
+     *
+     * @param updatedOn the updated on
+     */
+    public void setUpdatedOn(String updatedOn) {
+        this.updatedOn = updatedOn;
+    }
+
+    /**
+     * Gets is deleted.
+     *
+     * @return the is deleted
+     */
+    public String getIsDeleted() {
+        return isDeleted;
+    }
+
+    /**
+     * Sets is deleted.
+     *
+     * @param isDeleted the is deleted
+     */
+    public void setIsDeleted(String isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
     @Override
     public String toString() {
         return "Contact{" +
-                "id='" + id + '\'' +
+                "id=" + id +
                 ", fullName='" + fullName + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", contactNumbers=" + contactNumbers +
                 ", emails=" + emails +
+                ", createdOn='" + createdOn + '\'' +
+                ", updatedOn='" + updatedOn + '\'' +
+                ", isDeleted='" + isDeleted + '\'' +
                 '}';
     }
 
@@ -175,7 +265,9 @@ public class Contact {
             names[1] = "";
         }
 
-        this.lastName = names[0].trim();
-        this.firstName = names[1].trim();
+        if (this.lastName == null)
+            this.lastName = names[0].trim();
+        if (this.firstName == null)
+            this.firstName = names[1].trim();
     }
 }

@@ -1,5 +1,10 @@
 package com.github.chandanv89.telephonedirectory.model;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.Arrays;
+
 /**
  * The enum Contact category.
  */
@@ -29,14 +34,16 @@ public enum ContactCategory {
      */
     CUSTOM;
 
+    private static final Logger LOGGER = LogManager.getLogger(ContactCategory.class);
+
     /**
-     * From string contact category.
+     * Get ContactCategory for a given string.
      *
      * @param category the category
      * @return the contact category
      */
-    public ContactCategory fromString(String category) {
-        switch (category.toUpperCase()) {
+    public static ContactCategory fromString(String category) {
+        switch (category.trim().toUpperCase()) {
             case "PERSONAL":
                 return PERSONAL;
             case "WORK":
@@ -48,6 +55,9 @@ public enum ContactCategory {
             case "OTHERS":
                 return OTHERS;
             default:
+                LOGGER.info(">>> ContactCategory -> {}", CUSTOM);
+                LOGGER.info(">>> Available Options: " +
+                        Arrays.toString(ContactCategory.values()));
                 return CUSTOM;
         }
     }

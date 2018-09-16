@@ -4,7 +4,7 @@ import com.github.chandanv89.telephonedirectory.model.ContactNumber;
 
 import java.util.List;
 
-public interface CNumsMapper {
+public interface ContactNumbersMapper {
     List<ContactNumber> getContactNumbersByContactId(String contactId);
 
     List<ContactNumber> getAllContactNumbers();

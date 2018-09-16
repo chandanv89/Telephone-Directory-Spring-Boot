@@ -21,6 +21,14 @@ public class ContactNumber {
     @JsonProperty("isPrimary")
     private boolean isPrimary;
 
+    @JsonIgnore
+    @JsonProperty("createdOn")
+    private String createdOn;
+
+    @JsonIgnore
+    @JsonProperty("updatedOn")
+    private String updatedOn;
+
     /**
      * Instantiates a new Contact number.
      */
@@ -63,7 +71,7 @@ public class ContactNumber {
     public ContactNumber(String number, String category, boolean isPrimary) {
         this.number = number;
         this.isPrimary = isPrimary;
-        this.category = ContactCategory.OTHERS.fromString(category);
+        this.category = ContactCategory.OTHERS.fromString(category.toUpperCase());
 
     }
 
@@ -131,7 +139,52 @@ public class ContactNumber {
     }
 
     /**
+     * Gets created on.
+     *
+     * @return the created on
+     */
+    public String getCreatedOn() {
+        return createdOn;
+    }
+
+    /**
+     * Sets created on.
+     *
+     * @param createdOn the created on
+     */
+    public void setCreatedOn(String createdOn) {
+        this.createdOn = createdOn;
+    }
+
+    /**
+     * Gets updated on.
+     *
+     * @return the updated on
+     */
+    public String getUpdatedOn() {
+        return updatedOn;
+    }
+
+    /**
+     * Sets updated on.
+     *
+     * @param updatedOn the updated on
+     */
+    public void setUpdatedOn(String updatedOn) {
+        this.updatedOn = updatedOn;
+    }
+
+    /**
      * Sets category.
+     *
+     * @param category the category
+     */
+    public void setCategory(String category) {
+        this.category = ContactCategory.fromString(category);
+    }
+
+    /**
+     * Set category.
      *
      * @param category the category
      */
@@ -146,6 +199,8 @@ public class ContactNumber {
                 ", number='" + number + '\'' +
                 ", category=" + category +
                 ", isPrimary=" + isPrimary +
+                ", createdOn='" + createdOn + '\'' +
+                ", updatedOn='" + updatedOn + '\'' +
                 '}';
     }
 }
