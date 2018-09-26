@@ -31,6 +31,11 @@ public class EmailDataService implements EmailsMapper {
     }
 
     @Override
+    public int addEmails(List<Email> emails) {
+        return emailsMapper.addEmails(emails);
+    }
+
+    @Override
     public boolean updateEmail(Email email) {
         return false;
     }

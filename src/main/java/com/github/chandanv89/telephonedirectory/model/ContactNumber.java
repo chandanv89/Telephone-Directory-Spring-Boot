@@ -28,6 +28,7 @@ public class ContactNumber {
     @JsonIgnore
     @JsonProperty("updatedOn")
     private String updatedOn;
+    private String parentContactId;
 
     /**
      * Instantiates a new Contact number.
@@ -192,6 +193,24 @@ public class ContactNumber {
         this.category = category;
     }
 
+    /**
+     * Sets parent contact id.
+     *
+     * @param parentContactId the parent contact id
+     */
+    public void setParentContactId(String parentContactId) {
+        this.parentContactId = parentContactId;
+    }
+
+    /**
+     * Gets parent contact id.
+     *
+     * @return the parent contact id
+     */
+    public String getParentContactId() {
+        return parentContactId;
+    }
+
     @Override
     public String toString() {
         return "ContactNumber{" +
@@ -199,6 +218,7 @@ public class ContactNumber {
                 ", number='" + number + '\'' +
                 ", category=" + category +
                 ", isPrimary=" + isPrimary +
+                ", parentContactId='" + parentContactId + '\'' +
                 ", createdOn='" + createdOn + '\'' +
                 ", updatedOn='" + updatedOn + '\'' +
                 '}';

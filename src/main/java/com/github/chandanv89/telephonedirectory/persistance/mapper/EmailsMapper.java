@@ -34,6 +34,14 @@ public interface EmailsMapper {
     boolean addEmail(@Param("email") Email email);
 
     /**
+     * Add emails int.
+     *
+     * @param emails the emails
+     * @return the int
+     */
+    int addEmails(@Param("emails") List<Email> emails);
+
+    /**
      * Update email boolean.
      *
      * @param email the email

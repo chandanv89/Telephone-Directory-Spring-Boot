@@ -7,6 +7,7 @@ import com.github.chandanv89.telephonedirectory.model.Email;
 import com.github.chandanv89.telephonedirectory.persistance.ContactNumbersDataService;
 import com.github.chandanv89.telephonedirectory.persistance.ContactsDataService;
 import com.github.chandanv89.telephonedirectory.persistance.EmailDataService;
+import com.github.chandanv89.telephonedirectory.utility.Guid;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,16 +104,18 @@ public class DirectoryControllerHelper {
 
         response = new ApiResponse();
 
+        contact.setId(Guid.generate());
+        LOGGER.info(">>> Added new contact {}", contact.getId());
         int count = contactsDataService.addContact(contact);
 
         if (count > 0) {
-            contact.getContactNumbers().forEach(i -> contactNumbersDataService.addContactNumber(i));
+            LOGGER.info(">>> Added new contact {}", contact.getId());
 
-            contact.getEmails().forEach(i -> emailDataService.addEmail(i));
+            populateEmailIds(contact);
+            populateContactNumbers(contact);
 
             response.setBody(contact);
             response.setStatus(HttpStatus.CREATED);
-            LOGGER.info(">>> Added new contact {}", contact.getId());
         } else {
             LOGGER.info(">>> Failed to insert the contact!");
             response.setBody(null);
@@ -120,6 +123,42 @@ public class DirectoryControllerHelper {
         }
 
         return response;
+    }
+
+    private void populateContactNumbers(Contact contact) {
+        contact.getContactNumbers().forEach(cn -> {
+            cn.setId(Guid.generate());
+            cn.setParentContactId(contact.getId());
+        });
+
+        int count = contact.getContactNumbers().size();
+
+        if (count > 1) {
+            contactNumbersDataService.addContactNumbers(contact.getContactNumbers());
+            LOGGER.info(">>> Added multiple contact numbers to the contact {}", contact.getId());
+        } else if (count == 1) {
+            contactNumbersDataService.addContactNumber(contact.getContactNumbers().get(0));
+            LOGGER.info(">>> Added a contact number to the contact {}", contact.getId());
+        } else
+            LOGGER.info(">>> No contact numbers to add for the contact {}", contact.getId());
+    }
+
+    private void populateEmailIds(Contact contact) {
+        contact.getEmails().forEach(e -> {
+            e.setId(Guid.generate());
+            e.setParentContactId(contact.getId());
+        });
+
+        int count = contact.getEmails().size();
+
+        if(count > 1) {
+            emailDataService.addEmails(contact.getEmails());
+            LOGGER.info(">>> Added multiple email entries to the contact {}", contact.getId());
+        } else if(count == 1){
+            emailDataService.addEmail(contact.getEmails().get(0));
+            LOGGER.info(">>> Added an email entry to the contact {}", contact.getId());
+        } else
+            LOGGER.info(">>> No email details to add for the contact {}", contact.getId());
     }
 
     /**
@@ -130,17 +169,17 @@ public class DirectoryControllerHelper {
      */
     public ApiResponse deleteContactById(String id) {
         ApiResponse response = new ApiResponse();
-        LOGGER.info(">>> Deleting contact for id=" + id);
+        //LOGGER.info(">>> Deleting contact for id=" + id);
 
         if (StringUtils.isEmpty(id) || "".equals(id.trim())) {
-            LOGGER.info("FAILED. Empty Contact ID!");
+            LOGGER.info("Empty Contact ID!");
             response.setStatus(HttpStatus.BAD_REQUEST);
             response.setBody("Empty Contact ID!");
             return response;
         }
 
         int status = contactsDataService.markContactAsDeleted(id);
-        LOGGER.info("Done. " + status);
+        //LOGGER.info("Done. " + status);
 
         if (status > 0) {
             response.setStatus(HttpStatus.OK);
@@ -156,7 +195,7 @@ public class DirectoryControllerHelper {
     private ApiResponse validateRequest(Contact contact) {
         if (contact == null) {
             String message = "Null input!";
-            LOGGER.info(">>> " + message);
+            //LOGGER.info(">>> " + message);
             ApiResponse response = new ApiResponse();
             response.setStatus(HttpStatus.BAD_REQUEST);
             response.setBody(message);
@@ -177,7 +216,7 @@ public class DirectoryControllerHelper {
 
         if (isContactNumsEmpty && isEmailsEmpty) {
             String message = "Missing both contact number and emails information. Nothing to add!";
-            LOGGER.info(">>> " + message);
+            //LOGGER.info(">>> " + message);
             ApiResponse response = new ApiResponse();
             response.setStatus(HttpStatus.BAD_REQUEST);
             response.setBody(message);
@@ -194,7 +233,7 @@ public class DirectoryControllerHelper {
             response.setStatus(HttpStatus.BAD_REQUEST);
             response.setBody("Expected a list of contacts to add!");
 
-            LOGGER.info(">>> Failed to add contacts! ", response);
+            //LOGGER.info(">>> Failed to add contacts! ", response);
             return response;
         }
 

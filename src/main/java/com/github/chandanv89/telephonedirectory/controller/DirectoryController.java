@@ -30,16 +30,16 @@ public class DirectoryController implements Directory {
     public ApiResponse getAllContacts() {
         ApiResponse response = new ApiResponse();
 
-        LOGGER.info(">>> Fetching all the contacts...");
+        //LOGGER.info(">>> Fetching all the contacts...");
 
         try {
             response = helper.getAllContacts();
-            LOGGER.info("Done. ");
+            //LOGGER.info("Done. ");
         } catch (Exception e) {
             LOGGER.error(e);
             response.setStatus(HttpStatus.NOT_FOUND);
             response.setBody(new ArrayList<>());
-            LOGGER.info("FAILED!", response);
+            //LOGGER.info("FAILED!", response);
         }
 
         return response;
@@ -49,16 +49,16 @@ public class DirectoryController implements Directory {
     public ApiResponse getContactById(@PathVariable String id) {
         ApiResponse response = new ApiResponse();
 
-        LOGGER.info(">>> Fetching contact for id={}", id);
+        //LOGGER.info(">>> Fetching contact for id={}", id);
 
         try {
             response = helper.getContactById(id);
-            LOGGER.info("Done. ", response);
+            //LOGGER.info("Done. ", response);
         } catch (Exception e) {
             LOGGER.error(e);
             response.setStatus(HttpStatus.NOT_FOUND);
             response.setBody(null);
-            LOGGER.info("FAILED!", response);
+            //LOGGER.info("FAILED!", response);
         }
 
         return response;
@@ -69,7 +69,7 @@ public class DirectoryController implements Directory {
         ApiResponse response = new ApiResponse();
 
         try {
-            LOGGER.info(">>> Adding new contact: ", contact);
+            //LOGGER.info(">>> Adding new contact: ", contact);
             response = helper.addContact(contact);
         } catch (Exception e) {
             LOGGER.error(e);
@@ -85,7 +85,7 @@ public class DirectoryController implements Directory {
         ApiResponse response = new ApiResponse();
 
         try {
-            LOGGER.info(">>> Adding new contacts: ", contacts);
+            //LOGGER.info(">>> Adding new contacts: ", contacts);
             response = helper.addContacts(contacts);
         } catch (Exception e) {
             LOGGER.error(e);

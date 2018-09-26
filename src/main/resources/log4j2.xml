@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Properties>
+        <Property name="logPath">/home/cdn/applogs</Property>
+        <Property name="appName">telDirApp</Property>
+    </Properties>
+    <Appenders>
+        <Console name="consoleLog" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} | %-5level | %-40.40c{1.} : %msg%n"/>
+        </Console>
+        <RollingFile name="traceLog" fileName="${logPath}/${appName}-trace.log"
+                     filePattern="${logPath}/${appName}-trace-%d{yyyyMMdd}.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} | %-5level | %-40.40c{1.}: %msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+        </RollingFile>
+        <RollingFile name="aopLog" fileName="${logPath}/${appName}-aop.log"
+                     filePattern="${logPath}/${appName}-aop-%d{yyyyMMdd}.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5level] %-30.30c{1.}: %msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+        </RollingFile>
+        <RollingFile name="infoLog" fileName="${logPath}/${appName}-info.log"
+                     filePattern="${logPath}/${appName}-info-%d{yyyyMMdd}.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} | %-5level | %-40.40c{1.}: %msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+        </RollingFile>
+        <RollingFile name="errorLog" fileName="${logPath}/${appName}-error.log"
+                     filePattern="${logPath}/${appName}-error-%d{yyyyMMdd}.log">
+            <PatternLayout>
+                <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} | %-5level | %-40.40c{1.}: %msg%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Logger name="com.github.chandanv89.telephonedirectory" level="all" additivity="false">
+            <appender-ref ref="errorLog" level="warn"/>
+            <appender-ref ref="errorLog" level="error"/>
+            <appender-ref ref="traceLog" level="trace"/>
+            <appender-ref ref="infoLog" level="info"/>
+            <appender-ref ref="infoLog" level="debug"/>
+            <appender-ref ref="consoleLog" level="all"/>
+        </Logger>
+        <Logger name="com.github.chandanv89.telephonedirectory.aspect" level="all" additivity="false">
+            <appender-ref ref="aopLog" level="all"/>
+        </Logger>
+        <Root level="info" additivity="false">
+            <AppenderRef ref="consoleLog"/>
+        </Root>
+    </Loggers>
+</Configuration>
+
+
+        <!--
+        <?xml version="1.0" encoding="UTF-8"?>
+        <Configuration status="WARN" monitorInterval="30">
+            <Properties>
+                <Property name="LOG_PATTERN">
+                    %d{yyyy-MM-dd HH:mm:ss.SSS} %5p [%15.15t] %-40.40c{1.} : %-100m%n%ex
+                </Property>
+            </Properties>
+            <Appenders>
+                <Console name="ConsoleAppender" target="SYSTEM_OUT" follow="true">
+                    <PatternLayout pattern="${LOG_PATTERN}"/>
+                </Console>
+            </Appenders>
+            <Loggers>
+                <Logger name="com.github.chandanv89.telephonedirectory.persistance" level="debug" additivity="false">
+                    <AppenderRef ref="ConsoleAppender" />
+                </Logger>
+
+                <Root level="info">
+                    <AppenderRef ref="ConsoleAppender" />
+                </Root>
+            </Loggers>
+        </Configuration>-->

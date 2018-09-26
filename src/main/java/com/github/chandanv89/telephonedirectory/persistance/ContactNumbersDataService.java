@@ -7,6 +7,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * The type Contact numbers data service.
+ */
 @Component
 public class ContactNumbersDataService implements ContactNumbersMapper {
     @Autowired
@@ -25,6 +28,11 @@ public class ContactNumbersDataService implements ContactNumbersMapper {
     @Override
     public boolean addContactNumber(ContactNumber contactNumber) {
         return false;
+    }
+
+    @Override
+    public int addContactNumbers(List<ContactNumber> contactNumbers) {
+        return contactNumbersMapper.addContactNumbers(contactNumbers);
     }
 
     @Override

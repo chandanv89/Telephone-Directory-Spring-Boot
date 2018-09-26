@@ -28,6 +28,7 @@ public class Email {
     @JsonIgnore
     @JsonProperty("updatedOn")
     private String updatedOn;
+    private String parentContactId;
 
     /**
      * Instantiates a new Email.
@@ -198,8 +199,27 @@ public class Email {
                 ", emailId='" + emailId + '\'' +
                 ", category=" + category +
                 ", isPrimary=" + isPrimary +
+                ", parentContactId='" + parentContactId + '\'' +
                 ", createdOn='" + createdOn + '\'' +
                 ", updatedOn='" + updatedOn + '\'' +
                 '}';
+    }
+
+    /**
+     * Sets parent contact id.
+     *
+     * @param parentContactId the parent contact id
+     */
+    public void setParentContactId(String parentContactId) {
+        this.parentContactId = parentContactId;
+    }
+
+    /**
+     * Gets parent contact id.
+     *
+     * @return the parent contact id
+     */
+    public String getParentContactId() {
+        return parentContactId;
     }
 }

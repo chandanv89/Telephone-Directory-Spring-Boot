@@ -26,8 +26,8 @@
     </select>
 
     <insert id="addContact" parameterType="map" useGeneratedKeys="true">
-        INSERT INTO CONTACTS(FULL_NAME, FIRST_NAME, LAST_NAME)
-        VALUES(#{contact.fullName}, #{contact.firstName}, #{contact.lastName})
+        INSERT INTO CONTACTS(ID, FULL_NAME, FIRST_NAME, LAST_NAME)
+        VALUES(#{contact.id}, #{contact.fullName}, #{contact.firstName}, #{contact.lastName})
     </insert>
 
     <!--<insert id="addContacts" parameterType="java.util.List">
@@ -40,8 +40,9 @@
     </insert>-->
 
     <insert id="addContacts" parameterType="java.util.List">
-        INSERT INTO CONTACTS (FULL_NAME, FIRST_NAME, LAST_NAME) VALUES
+        INSERT INTO CONTACTS (ID, FULL_NAME, FIRST_NAME, LAST_NAME) VALUES
         <foreach collection="list" item="c" index="index" open="(" separator="),(" close=")">
+            #{c.id},
             #{c.fullName},
             #{c.firstName},
             #{c.lastName}
