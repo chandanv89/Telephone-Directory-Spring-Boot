@@ -14,8 +14,6 @@
     <util:properties id="prop" location="classpath*:/application.properties"/>
 
     <context:annotation-config/>
-
-<!--    <context:component-scan base-package="com.github.chandanv89.telephonedirectory.controller"/>-->
     <context:component-scan base-package="com.github.chandanv89.telephonedirectory.persistance"/>
 
     <bean id="appDataSource" destroy-method="close"
@@ -37,11 +35,5 @@
         <property name="basePackage"
                   value="com.github.chandanv89.telephonedirectory.persistance.mapper"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
-    </bean>
-
-    <bean id="contactsMapperFactoryBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
-        <property name="mapperInterface"
-                  value="com.github.chandanv89.telephonedirectory.persistance.mapper.ContactsMapper"/>
-        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
     </bean>
 </beans>

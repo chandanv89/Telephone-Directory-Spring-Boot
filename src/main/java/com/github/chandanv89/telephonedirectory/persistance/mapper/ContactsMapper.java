@@ -25,12 +25,20 @@ public interface ContactsMapper {
     List<Contact> getAllContacts();
 
     /**
-     * Add contact string.
+     * Insert a new contact.
      *
      * @param contact the contact
-     * @return the string
+     * @return the number of inserted records
      */
-    String addContact(@Param("contact") Contact contact);
+    int addContact(@Param("contact") Contact contact);
+
+    /**
+     * Add contacts int.
+     *
+     * @param contacts the contacts
+     * @return the int
+     */
+    int addContacts(@Param("contacts") List<Contact> contacts);
 
     /**
      * Delete contact by id string.
@@ -39,6 +47,14 @@ public interface ContactsMapper {
      * @return the string
      */
     String deleteContactById(@Param("id") String id);
+
+    /**
+     * Mark contact as deleted int.
+     *
+     * @param id the id
+     * @return the int
+     */
+    int markContactAsDeleted(@Param("id") String id);
 
     /**
      * Update contact by id string.

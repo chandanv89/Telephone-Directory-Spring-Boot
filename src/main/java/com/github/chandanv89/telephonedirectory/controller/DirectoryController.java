@@ -1,17 +1,16 @@
 package com.github.chandanv89.telephonedirectory.controller;
 
+import com.github.chandanv89.telephonedirectory.controller.helper.DirectoryControllerHelper;
 import com.github.chandanv89.telephonedirectory.model.ApiResponse;
 import com.github.chandanv89.telephonedirectory.model.Contact;
-import com.github.chandanv89.telephonedirectory.persistance.ContactsDataService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.util.ObjectUtils;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The type Directory controller.
@@ -25,20 +24,41 @@ public class DirectoryController implements Directory {
     private static final Logger LOGGER = LogManager.getLogger("DirectoryController");
 
     @Autowired
-    private ContactsDataService contactsDataService;
+    private DirectoryControllerHelper helper;
 
     @GetMapping
     public ApiResponse getAllContacts() {
         ApiResponse response = new ApiResponse();
 
+        //LOGGER.info(">>> Fetching all the contacts...");
+
         try {
-            LOGGER.info(">>> Fetching all the contacts...");
-            response.setBody(contactsDataService.getAllContacts());
-            response.setStatus(HttpStatus.OK);
+            response = helper.getAllContacts();
+            //LOGGER.info("Done. ");
         } catch (Exception e) {
             LOGGER.error(e);
             response.setStatus(HttpStatus.NOT_FOUND);
             response.setBody(new ArrayList<>());
+            //LOGGER.info("FAILED!", response);
+        }
+
+        return response;
+    }
+
+    @GetMapping(path = "{id}", produces = "application/json")
+    public ApiResponse getContactById(@PathVariable String id) {
+        ApiResponse response = new ApiResponse();
+
+        //LOGGER.info(">>> Fetching contact for id={}", id);
+
+        try {
+            response = helper.getContactById(id);
+            //LOGGER.info("Done. ", response);
+        } catch (Exception e) {
+            LOGGER.error(e);
+            response.setStatus(HttpStatus.NOT_FOUND);
+            response.setBody(null);
+            //LOGGER.info("FAILED!", response);
         }
 
         return response;
@@ -49,10 +69,8 @@ public class DirectoryController implements Directory {
         ApiResponse response = new ApiResponse();
 
         try {
-            LOGGER.info(">>> Adding new contact: ", contact);
-            response.setBody("{\"id\":\"" + contactsDataService.addContact(contact) + "\"}");
-            response.setStatus(HttpStatus.CREATED);
-            LOGGER.info(">>> Added new contact {}", contact.getId());
+            //LOGGER.info(">>> Adding new contact: ", contact);
+            response = helper.addContact(contact);
         } catch (Exception e) {
             LOGGER.error(e);
             response.setStatus(HttpStatus.NOT_FOUND);
@@ -62,15 +80,13 @@ public class DirectoryController implements Directory {
         return response;
     }
 
-    @GetMapping(path = "{id}", produces = "application/json")
-    public ApiResponse getContactById(@PathVariable String id) {
+    @PostMapping(produces = "application/json")
+    public ApiResponse addContacts(@RequestBody List<Contact> contacts) {
         ApiResponse response = new ApiResponse();
 
         try {
-            LOGGER.info(">>> Fetching contact for id={}", id);
-            Contact contact = contactsDataService.getContactById(id);
-            response.setBody(contact);
-            response.setStatus(!ObjectUtils.isEmpty(contact) ? HttpStatus.FOUND : HttpStatus.NOT_FOUND);
+            //LOGGER.info(">>> Adding new contacts: ", contacts);
+            response = helper.addContacts(contacts);
         } catch (Exception e) {
             LOGGER.error(e);
             response.setStatus(HttpStatus.NOT_FOUND);
@@ -85,9 +101,7 @@ public class DirectoryController implements Directory {
         ApiResponse response = new ApiResponse();
 
         try {
-            String status = contactsDataService.deleteContactById(id);
-            response.setBody("{\"id\":\"" + id + "\",\"deleted\":" + status + "}");
-            response.setStatus(!StringUtils.isEmpty(status) ? HttpStatus.OK : HttpStatus.NOT_FOUND);
+            response = helper.deleteContactById(id);
         } catch (Exception e) {
             LOGGER.error(e);
             response.setStatus(HttpStatus.NOT_FOUND);

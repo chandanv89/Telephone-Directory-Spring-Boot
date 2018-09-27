@@ -26,13 +26,23 @@ public class ContactsDataService implements ContactsMapper {
     }
 
     @Override
-    public String addContact(Contact contact) {
+    public int addContact(Contact contact) {
         return contactsMapper.addContact(contact);
+    }
+
+    @Override
+    public int addContacts(List<Contact> contacts) {
+        return contactsMapper.addContacts(contacts);
     }
 
     @Override
     public String deleteContactById(String id) {
         return contactsMapper.deleteContactById(id);
+    }
+
+    @Override
+    public int markContactAsDeleted(String id) {
+        return contactsMapper.markContactAsDeleted(id);
     }
 
     @Override

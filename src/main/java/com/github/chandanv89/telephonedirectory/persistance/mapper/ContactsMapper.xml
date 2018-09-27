@@ -7,36 +7,42 @@
         <result property="fullName"  column="FULL_NAME"  jdbcType="VARCHAR"/>
         <result property="firstName" column="FIRST_NAME" jdbcType="VARCHAR"/>
         <result property="lastName"  column="LAST_NAME"  jdbcType="VARCHAR"/>
+        <result property="isDeleted" column="DELETED"    jdbcType="CHAR"/>
+        <result property="createdOn" column="CRE_DT"     jdbcType="TIMESTAMP"/>
+        <result property="updatedOn" column="UPD_DT"     jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <select id="getAllContacts" resultMap="contact" resultType="com.github.chandanv89.telephonedirectory.model.Contact">
-        SELECT ID, FULL_NAME, FIRST_NAME, LAST_NAME
+        SELECT ID, FULL_NAME, FIRST_NAME, LAST_NAME, DELETED, CRE_DT, UPD_DT
         FROM CONTACTS
+        WHERE DELETED = 'N'
     </select>
 
     <select id="getContactById" resultMap="contact" resultType="com.github.chandanv89.telephonedirectory.model.Contact">
-        SELECT ID, FULL_NAME, FIRST_NAME, LAST_NAME
+        SELECT ID, FULL_NAME, FIRST_NAME, LAST_NAME, DELETED, CRE_DT, UPD_DT
         FROM CONTACTS
         WHERE ID=#{id}
+        AND DELETED = 'N'
     </select>
 
     <insert id="addContact" parameterType="map" useGeneratedKeys="true">
-        INSERT INTO CONTACTS(FULL_NAME, FIRST_NAME, LAST_NAME)
-        VALUES(#{contact.fullName}, #{contact.firstName}, #{contact.lastName})
+        INSERT INTO CONTACTS(ID, FULL_NAME, FIRST_NAME, LAST_NAME)
+        VALUES(#{contact.id}, #{contact.fullName}, #{contact.firstName}, #{contact.lastName})
     </insert>
 
-    <insert id="addContactList" parameterType="java.util.List">
+    <!--<insert id="addContacts" parameterType="java.util.List">
         INSERT ALL
         <foreach collection="contacts" item="c" index="index">
-            INTO CONTACTS (full_name, first_name, last_name)
+            INTO CONTACTS (FULL_NAME, FIRST_NAME, LAST_NAME)
             VALUES (#{c.fullName},#{c.firstName}, #{c.lastName})
         </foreach>
         SELECT * FROM dual
-    </insert>
+    </insert>-->
 
     <insert id="addContacts" parameterType="java.util.List">
-        INSERT INTO CONTACTS (full_name, first_name, last_name) VALUES
+        INSERT INTO CONTACTS (ID, FULL_NAME, FIRST_NAME, LAST_NAME) VALUES
         <foreach collection="list" item="c" index="index" open="(" separator="),(" close=")">
+            #{c.id},
             #{c.fullName},
             #{c.firstName},
             #{c.lastName}
@@ -48,12 +54,19 @@
         WHERE ID = #{id}
     </delete>
 
+    <update id="markContactAsDeleted" parameterType="String">
+        UPDATE CONTACTS SET DELETED = 'Y'
+        WHERE ID=#{id}
+    </update>
+
     <update id="updateContactById" parameterType="map">
         UPDATE CONTACTS
         SET FULL_NAME = #{contact.fullName},
         FIRST_NAME = #{contact.firstName},
-        LAST_NAME = #{contact.lastName}
+        LAST_NAME = #{contact.lastName},
+        UPD_DT = CURRENT_TIMESTAMP
         WHERE ID = #{contact.id}
+        AND DELETED = 'N'
     </update>
 
 </mapper>

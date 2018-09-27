@@ -21,6 +21,15 @@ public class Email {
     @JsonProperty("isPrimary")
     private boolean isPrimary;
 
+    @JsonIgnore
+    @JsonProperty("createdOn")
+    private String createdOn;
+
+    @JsonIgnore
+    @JsonProperty("updatedOn")
+    private String updatedOn;
+    private String parentContactId;
+
     /**
      * Instantiates a new Email.
      */
@@ -63,7 +72,7 @@ public class Email {
     public Email(String emailId, String category, boolean isPrimary) {
         this.emailId = emailId;
         this.isPrimary = isPrimary;
-        this.category = ContactCategory.OTHERS.fromString(category);
+        this.category = ContactCategory.fromString(category);
     }
 
     /**
@@ -121,6 +130,15 @@ public class Email {
     }
 
     /**
+     * Sets category.
+     *
+     * @param category the category
+     */
+    public void setCategory(String category) {
+        this.category = ContactCategory.fromString(category);
+    }
+
+    /**
      * Is primary boolean.
      *
      * @return the boolean
@@ -138,6 +156,42 @@ public class Email {
         isPrimary = primary;
     }
 
+    /**
+     * Gets created on.
+     *
+     * @return the created on
+     */
+    public String getCreatedOn() {
+        return createdOn;
+    }
+
+    /**
+     * Sets created on.
+     *
+     * @param createdOn the created on
+     */
+    public void setCreatedOn(String createdOn) {
+        this.createdOn = createdOn;
+    }
+
+    /**
+     * Gets updated on.
+     *
+     * @return the updated on
+     */
+    public String getUpdatedOn() {
+        return updatedOn;
+    }
+
+    /**
+     * Sets updated on.
+     *
+     * @param updatedOn the updated on
+     */
+    public void setUpdatedOn(String updatedOn) {
+        this.updatedOn = updatedOn;
+    }
+
     @Override
     public String toString() {
         return "Email{" +
@@ -145,6 +199,27 @@ public class Email {
                 ", emailId='" + emailId + '\'' +
                 ", category=" + category +
                 ", isPrimary=" + isPrimary +
+                ", parentContactId='" + parentContactId + '\'' +
+                ", createdOn='" + createdOn + '\'' +
+                ", updatedOn='" + updatedOn + '\'' +
                 '}';
+    }
+
+    /**
+     * Sets parent contact id.
+     *
+     * @param parentContactId the parent contact id
+     */
+    public void setParentContactId(String parentContactId) {
+        this.parentContactId = parentContactId;
+    }
+
+    /**
+     * Gets parent contact id.
+     *
+     * @return the parent contact id
+     */
+    public String getParentContactId() {
+        return parentContactId;
     }
 }
