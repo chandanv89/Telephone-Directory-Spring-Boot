@@ -1,12 +1,21 @@
 language: java
+dist: trusty
 sudo: false
+install: true
+
+jdk:
+  - oraclejdk8
 
 addons:
   apt:
     packages:
     - oracle-java8-installer
 
-branches:
-  only:
-  - master
-  - develop.2018.09
+  sonarcloud:
+    organization: "chandanv89-github"
+    token:
+      secure: "dxlovoJu0ljXvo/WujIrNdl5lfxiS2OccKQxDc1/Rpn2/OIMfWo/v9YPElFDyM3dDP1LH36+yP+yTBXcq2OmjORGxz9Zob8KjUeQl6Lz6VzT6vqta9U0BciMWGhMRlu4eWRSJvDFiZi2yU+JbKjDmi1N1LzaMVXC+qdBr1V9GXvmXj5A496PHOvKixOhVHqAKP2/jJVnIFx4I9QTyNi+dv6XYIy/dH2hBnuxHDSecYaabiPsoAgjUJPnRENGnbQeuH6U5jUDDzjjQY2uASX+uhB5Dhkuz+3nXlwrSixhDAj2DV1tX9OA67R5SCyin1SAI8t+2Ziq5wO/sdBH68JsmuiFnXB0xlSJta8ghTORr4HH/bVY8dBicEcgeuO2fyHII5u4NOEqkDhskVDI2lMGWGuj3cgaSaKM5RHof9UttwxGv7U5/1kzK6r6oADojvYNoWYPKMV5cxQp2xYWN2pLBNKmX1/xWplYilkvR63DgK2dyObKwVB5liki4r0g98ZKw0WE8fHnKNGybffUKpmwKz/tq0mdkLk6Hz8pgZp+QV4+TzuAlZYxJmecjYxh9Ed7nx4N5zYrntOrkybZwkZ9mP1e3EF8X9iQUkTfG8ITb0JBv4InwE4JPMtqy6Mf8jFgvGAgKFGGWqSLy21iojhRBjldHN9KZtJZ1mTRkMEadT4="
+
+script:
+  # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
