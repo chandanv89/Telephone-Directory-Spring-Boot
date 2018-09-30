@@ -22,12 +22,12 @@ public class ContactNumbersDataService implements ContactNumbersMapper {
 
     @Override
     public List<ContactNumber> getAllContactNumbers() {
-        return null;
+        return contactNumbersMapper.getAllContactNumbers();
     }
 
     @Override
     public boolean addContactNumber(ContactNumber contactNumber) {
-        return false;
+        return contactNumbersMapper.addContactNumber(contactNumber);
     }
 
     @Override
@@ -37,11 +37,16 @@ public class ContactNumbersDataService implements ContactNumbersMapper {
 
     @Override
     public boolean updateContactNumber(ContactNumber contactNumber) {
-        return false;
+        return contactNumbersMapper.updateContactNumber(contactNumber);
     }
 
     @Override
     public boolean deleteContactNumber(String id) {
-        return false;
+        return contactNumbersMapper.deleteContactNumber(id);
+    }
+
+    @Override
+    public boolean deleteContactNumbersByContactId(String parentContactId) {
+        return contactNumbersMapper.deleteContactNumbersByContactId(parentContactId);
     }
 }

@@ -17,7 +17,7 @@ public class EmailDataService implements EmailsMapper {
 
     @Override
     public List<Email> getAllEmails() {
-        return null;
+        return emailsMapper.getAllEmails();
     }
 
     @Override
@@ -27,7 +27,7 @@ public class EmailDataService implements EmailsMapper {
 
     @Override
     public boolean addEmail(Email email) {
-        return false;
+        return emailsMapper.addEmail(email);
     }
 
     @Override
@@ -37,11 +37,11 @@ public class EmailDataService implements EmailsMapper {
 
     @Override
     public boolean updateEmail(Email email) {
-        return false;
+        return emailsMapper.updateEmail(email);
     }
 
     @Override
     public boolean deleteEmail(String id) {
-        return false;
+        return emailsMapper.deleteEmail(id);
     }
 }

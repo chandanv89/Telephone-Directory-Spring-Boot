@@ -48,4 +48,8 @@
             #{c.parentContactId}
         </foreach>
     </insert>
+
+    <update id="deleteContactNumbersByContactId">
+        UPDATE TABLE C_NUMS SET DELETED='Y' WHERE C_ID=#{parentContactId}
+    </update>
 </mapper>

@@ -17,4 +17,6 @@ public interface ContactNumbersMapper {
     boolean updateContactNumber(@Param("contactNumber") ContactNumber contactNumber);
 
     boolean deleteContactNumber(@Param("id") String id);
+
+    boolean deleteContactNumbersByContactId(@Param("parentContactId") String parentContactId);
 }
