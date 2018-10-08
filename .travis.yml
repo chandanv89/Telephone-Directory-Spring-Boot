@@ -16,16 +16,17 @@ sonarcloud:
   token:
     secure: "dxlovoJu0ljXvo/WujIrNdl5lfxiS2OccKQxDc1/Rpn2/OIMfWo/v9YPElFDyM3dDP1LH36+yP+yTBXcq2OmjORGxz9Zob8KjUeQl6Lz6VzT6vqta9U0BciMWGhMRlu4eWRSJvDFiZi2yU+JbKjDmi1N1LzaMVXC+qdBr1V9GXvmXj5A496PHOvKixOhVHqAKP2/jJVnIFx4I9QTyNi+dv6XYIy/dH2hBnuxHDSecYaabiPsoAgjUJPnRENGnbQeuH6U5jUDDzjjQY2uASX+uhB5Dhkuz+3nXlwrSixhDAj2DV1tX9OA67R5SCyin1SAI8t+2Ziq5wO/sdBH68JsmuiFnXB0xlSJta8ghTORr4HH/bVY8dBicEcgeuO2fyHII5u4NOEqkDhskVDI2lMGWGuj3cgaSaKM5RHof9UttwxGv7U5/1kzK6r6oADojvYNoWYPKMV5cxQp2xYWN2pLBNKmX1/xWplYilkvR63DgK2dyObKwVB5liki4r0g98ZKw0WE8fHnKNGybffUKpmwKz/tq0mdkLk6Hz8pgZp+QV4+TzuAlZYxJmecjYxh9Ed7nx4N5zYrntOrkybZwkZ9mP1e3EF8X9iQUkTfG8ITb0JBv4InwE4JPMtqy6Mf8jFgvGAgKFGGWqSLy21iojhRBjldHN9KZtJZ1mTRkMEadT4="
 
-before_install:
-  - sudo apt-get install jq
-  - wget -O ~/codacy-coverage-reporter-assembly-latest.jar $(curl https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest | jq -r .assets[0].browser_download_url)
+#before_install:
+#  - sudo apt-get install jq
+#  - wget -O ~/codacy-coverage-reporter-assembly-latest.jar $(curl https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest | jq -r .assets[0].browser_download_url)
 
-after_success:
-  - java -jar ~/codacy-coverage-reporter-assembly-latest.jar report -l Java -r build/reports/jacoco/test/jacocoTestReport.xml
+#after_success:
+#  - java -jar ~/codacy-coverage-reporter-assembly-latest.jar report -l Java -r build/reports/jacoco/test/jacocoTestReport.xml
 
 script:
 # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
-- mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=chandanv89-github -Dsonar.login=45c1fdc2f8018226dff57c7cbf7399aff4588ee3 com.gavinmogan:codacy-maven-plugin:coverage -DcoverageReportFile=target/site/jacoco/jacoco.xml -DprojectToken=c12786f379504e96aff5d51fba18b6ff -DapiToken=7046b37b74474d4192738a8c901788f4
+- mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=chandanv89-github -Dsonar.login=45c1fdc2f8018226dff57c7cbf7399aff4588ee3 
+#com.gavinmogan:codacy-maven-plugin:coverage -DcoverageReportFile=target/site/jacoco/jacoco.xml -DprojectToken=c12786f379504e96aff5d51fba18b6ff -DapiToken=7046b37b74474d4192738a8c901788f4
 
 cache:
   directories:
