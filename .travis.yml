@@ -25,7 +25,7 @@ after_success:
 
 script:
 # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
-- mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=chandanv89-github -Dsonar.login=45c1fdc2f8018226dff57c7cbf7399aff4588ee3
+- mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=chandanv89-github -Dsonar.login=45c1fdc2f8018226dff57c7cbf7399aff4588ee3 com.gavinmogan:codacy-maven-plugin:coverage -DcoverageReportFile=target/site/jacoco/jacoco.xml -DprojectToken=c12786f379504e96aff5d51fba18b6ff -DapiToken=7046b37b74474d4192738a8c901788f4
 
 cache:
   directories:
