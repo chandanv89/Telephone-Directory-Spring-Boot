@@ -15,11 +15,11 @@ import java.util.List;
 /**
  * The type Directory controller.
  */
-@RestController
-@RequestMapping(
-        path = "/contacts",
-        produces = "application/json"
-)
+//@RestController
+//@RequestMapping(
+//        path = "/contacts",
+//        produces = "application/json"
+//)
 public class DirectoryController implements Directory {
     private static final Logger LOGGER = LogManager.getLogger("DirectoryController");
 

@@ -4,7 +4,6 @@ import com.github.chandanv89.telephonedirectory.model.Contact;
 import com.github.chandanv89.telephonedirectory.model.ContactNumber;
 import com.github.chandanv89.telephonedirectory.model.Email;
 import com.github.chandanv89.telephonedirectory.persistance.mapper.ContactsMapper;
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -16,13 +15,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
+/**
+ * The type Test contacts data service.
+ */
 class TestContactsDataService {
     @InjectMocks
     private ContactsDataService contactsDataService;
@@ -30,6 +30,9 @@ class TestContactsDataService {
     @Mock
     private ContactsMapper contactsMapper;
 
+    /**
+     * Sets up.
+     */
     @BeforeEach
     void setUp() {
         MockitoAnnotations.initMocks(this);
@@ -80,6 +83,9 @@ class TestContactsDataService {
         return contacts;
     }
 
+    /**
+     * Test get contact by id.
+     */
     @Test
     void testGetContactById() {
         Contact contact = contactsDataService.getContactById("123");
@@ -88,18 +94,30 @@ class TestContactsDataService {
         assertNotNull(contact, "Not supposed to be null!");
     }
 
+    /**
+     * Test get all contacts.
+     */
     @Test
     void testGetAllContacts() {
     }
 
+    /**
+     * Test add contact.
+     */
     @Test
     void testAddContact() {
     }
 
+    /**
+     * Test delete contact by id.
+     */
     @Test
     void testDeleteContactById() {
     }
 
+    /**
+     * Test update contact by id.
+     */
     @Test
     void testUpdateContactById() {
     }

@@ -48,4 +48,11 @@
             #{e.parentContactId}
         </foreach>
     </insert>
+
+    <update id="deleteEmailsByContactId">
+        UPDATE TABLE EMAILS
+        SET DELETED = TRUE,
+        UPD_DT  = CURRENT_TIMESTAMP
+        WHERE C_ID  = #{parentContactId}
+    </update>
 </mapper>

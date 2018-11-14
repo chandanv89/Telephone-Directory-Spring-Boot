@@ -2,6 +2,7 @@ package com.github.chandanv89.telephonedirectory.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -254,6 +255,11 @@ public class Contact {
 
     private void setNameComponents() {
         String[] names;
+
+        if(StringUtils.isBlank(fullName)) {
+            this.firstName = this.lastName = null;
+            return;
+        }
 
         if (fullName.contains(",")) {
             names = fullName.split(",");

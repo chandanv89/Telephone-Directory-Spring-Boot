@@ -56,4 +56,12 @@ public interface EmailsMapper {
      * @return the boolean
      */
     boolean deleteEmail(@Param("id") String id);
+
+    /**
+     * Delete emails by contact id boolean.
+     *
+     * @param parentContactId the parent contact id
+     * @return the boolean
+     */
+    boolean deleteEmailsByContactId(@Param("parentContactId") String parentContactId);
 }
