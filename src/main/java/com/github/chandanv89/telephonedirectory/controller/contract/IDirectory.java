@@ -1,12 +1,12 @@
-package com.github.chandanv89.telephonedirectory.controller;
+package com.github.chandanv89.telephonedirectory.controller.contract;
 
 import com.github.chandanv89.telephonedirectory.model.ApiResponse;
 import com.github.chandanv89.telephonedirectory.model.Contact;
 
 /**
- * The interface Directory.
+ * The interface IDirectory.
  */
-public interface Directory {
+public interface IDirectory {
     /**
      * Add contact api response.
      *
