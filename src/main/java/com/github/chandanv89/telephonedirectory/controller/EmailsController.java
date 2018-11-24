@@ -30,7 +30,7 @@ public class EmailsController implements IEmails {
     @Override
     @PostMapping(path = "{parentContactId}")
     public ApiResponse createEmails(@PathVariable String parentContactId, @RequestBody List<Email> emails) {
-        return null;
+        return helper.createEmails(parentContactId, emails);
     }
 
     @Override

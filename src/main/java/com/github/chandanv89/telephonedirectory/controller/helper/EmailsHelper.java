@@ -4,11 +4,13 @@ import com.github.chandanv89.telephonedirectory.controller.contract.IEmails;
 import com.github.chandanv89.telephonedirectory.model.ApiResponse;
 import com.github.chandanv89.telephonedirectory.model.Email;
 import com.github.chandanv89.telephonedirectory.persistance.EmailDataService;
+import com.github.chandanv89.telephonedirectory.utility.Guid;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
@@ -64,7 +66,56 @@ public class EmailsHelper implements IEmails {
 
     @Override
     public ApiResponse createEmails(String parentContactId, List<Email> emails) {
-        return null;
+        ApiResponse response = new ApiResponse();
+
+        try {
+            if (CollectionUtils.isEmpty(emails)) {
+                response.setBody("Please include at least one email!");
+                response.setStatus(HttpStatus.BAD_REQUEST);
+                return response;
+            }
+
+            // if any of the emails found to have the parentContactId field missing, set it
+            // to the path parameter, parentContactId. Otherwise, send an error response.
+            if (emails.stream().anyMatch(e -> StringUtils.isBlank(e.getParentContactId()))) {
+                if (StringUtils.isBlank(parentContactId)) {
+                    response.setStatus(HttpStatus.BAD_REQUEST);
+                    response.setBody("No parent contact ID found!");
+                    return response;
+                } else {
+                    emails.forEach(e -> {
+                        if (StringUtils.isBlank(e.getParentContactId())) {
+                            e.setParentContactId(parentContactId);
+                            LOGGER.info("Found parent contact ID missing for the email id '{}'. " +
+                                    "Setting the parentContactId to {}", e.getEmailId(), parentContactId);
+                        }
+                    });
+                }
+            }
+
+            if (!emails.stream().allMatch(e -> StringUtils.isNotBlank(e.getEmailId()))) {
+                response.setStatus(HttpStatus.BAD_REQUEST);
+                response.setBody("No blank emails are allowed!");
+                return response;
+            }
+
+            emails.forEach(e -> e.setId(Guid.generate()));
+
+            int count = service.addEmails(emails);
+            LOGGER.info("Create {} email IDs", count);
+
+            response.setBody("Created " + count + " email IDs");
+            response.setStatus(HttpStatus.OK);
+        } catch (DataIntegrityViolationException e) {
+            LOGGER.error(e);
+            response.setStatus(HttpStatus.BAD_REQUEST);
+            response.setBody("Please make sure the parentContactId is valid!");
+        } catch (Exception e) {
+            response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+            response.setBody(getExceptionMsg(e));
+        }
+
+        return response;
     }
 
     @Override
@@ -84,6 +135,6 @@ public class EmailsHelper implements IEmails {
 
     private String getExceptionMsg(final Exception e) {
         LOGGER.error(e);
-        return "Please check logs for more details on the error: " + e.getCause().getMessage();
+        return "Please check logs for more details on the error: " + e.getMessage();
     }
 }
