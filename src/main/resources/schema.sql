@@ -79,9 +79,9 @@ set
 			cre_dt,
 			upd_dt )
 		VALUES( '88df9efb-b3c0-11e8-8cde-0071cc56c4c3',
-		'Chandan Veerabhadrappa',
-		'Chandan',
-		'Veerabhadrappa',
+		'Chad Murphy',
+		'Chad',
+		'Murphy',
 		'N',
 		'2018-09-15 14:13:50.000',
 		NULL );
@@ -95,9 +95,9 @@ set
 			cre_dt,
 			upd_dt )
 		VALUES( '97013221-b3c9-11e8-8cde-0071cc56c4c3',
-		'Vidyashree G S',
-		'Vidyashree',
-		'G S',
+		'Victor Spencer',
+		'Victor',
+		'Spencer',
 		'2018-09-15 14:13:50.000',
 		'N',
 		NULL );
@@ -111,9 +111,9 @@ set
 			cre_dt,
 			upd_dt )
 		VALUES( 'd240feee-b793-11e8-bdb8-0071cc56c4c3',
-		'Veerabhadrappa',
-		'Veerabhadrappa',
-		'Tagadur',
+		'Spencer',
+		'Docks',
+		'Spencer',
 		'2018-09-15 14:13:50.000',
 		'N',
 		NULL );
@@ -133,7 +133,7 @@ set
 		cre_dt,
 		upd_dt )
 	VALUES( '19d6f7f7-b3c3-11e8-8cde-0071cc56c4c3',
-	'+918970151014',
+	'+1234567890',
 	'MOBILE',
 	0,
 	'88df9efb-b3c0-11e8-8cde-0071cc56c4c3',
@@ -149,7 +149,7 @@ INSERT
 		cre_dt,
 		upd_dt )
 	VALUES( '9c99d984-b3c2-11e8-8cde-0071cc56c4c3',
-	'+353899802537',
+	'+4124257658',
 	'MOBILE',
 	1,
 	'88df9efb-b3c0-11e8-8cde-0071cc56c4c3',
@@ -165,7 +165,7 @@ INSERT
 		cre_dt,
 		upd_dt )
 	VALUES( 'aa454933-b3c9-11e8-8cde-0071cc56c4c3',
-	'+91123456789',
+	'++35322410124',
 	'MOBILE',
 	0,
 	'97013221-b3c9-11e8-8cde-0071cc56c4c3',
@@ -181,7 +181,7 @@ INSERT
 		cre_dt,
 		upd_dt )
 	VALUES( 'c8f67767-b3c9-11e8-8cde-0071cc56c4c3',
-	'+353899777047',
+	'+91554212452',
 	'MOBILE',
 	1,
 	'97013221-b3c9-11e8-8cde-0071cc56c4c3',
@@ -203,7 +203,7 @@ INTO
 	cre_dt,
 	upd_dt )
 VALUES( '0ed878d0-b3c3-11e8-8cde-0071cc56c4c3',
-'chandan_v@infosys.com',
+'tedMosby@gmail.com',
 'WORK',
 0,
 '88df9efb-b3c0-11e8-8cde-0071cc56c4c3',
@@ -219,7 +219,7 @@ INTO
 	cre_dt,
 	upd_dt )
 VALUES( 'bc8ddb0b-b3c9-11e8-8cde-0071cc56c4c3',
-'vidyashree3@gmail.com.com',
+'victor.spencer@outlook.com',
 'PERSONAL',
 0,
 '97013221-b3c9-11e8-8cde-0071cc56c4c3',
@@ -235,7 +235,7 @@ INTO
 	cre_dt,
 	upd_dt )
 VALUES( 'fe821183-b3c2-11e8-8cde-0071cc56c4c3',
-'chanadnv89@gmail.com',
+'chadMurphy@gmail.com',
 'PERSONAL',
 1,
 '88df9efb-b3c0-11e8-8cde-0071cc56c4c3',
