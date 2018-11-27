@@ -238,7 +238,6 @@ public class DirectoryControllerHelper {
 
         if (isContactNumsEmpty && isEmailsEmpty) {
             String message = "Missing both contact number and emails information. Nothing to add!";
-            //LOGGER.info(">>> " + message);
             ApiResponse response = new ApiResponse();
             response.setStatus(HttpStatus.BAD_REQUEST);
             response.setBody(message);
