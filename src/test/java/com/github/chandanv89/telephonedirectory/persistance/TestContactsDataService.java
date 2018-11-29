@@ -23,7 +23,7 @@ import static org.mockito.Mockito.*;
 /**
  * The type Test contacts data service.
  */
-class TestContactsDataService {
+public class TestContactsDataService {
     @InjectMocks
     private ContactsDataService contactsDataService;
 
@@ -34,7 +34,7 @@ class TestContactsDataService {
      * Sets up.
      */
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
 
         when(contactsMapper.addContact(Mockito.any(Contact.class))).thenReturn(1);
@@ -87,7 +87,7 @@ class TestContactsDataService {
      * Test get contact by id.
      */
     @Test
-    void testGetContactById() {
+    public void testGetContactById() {
         Contact contact = contactsDataService.getContactById("123");
 
         verify(contactsMapper, atLeastOnce()).getContactById("123");
@@ -98,27 +98,31 @@ class TestContactsDataService {
      * Test get all contacts.
      */
     @Test
-    void testGetAllContacts() {
+    public void testGetAllContacts() {
+        // yet to be tested
     }
 
     /**
      * Test add contact.
      */
     @Test
-    void testAddContact() {
+    public void testAddContact() {
+        // yet to be tested
     }
 
     /**
      * Test delete contact by id.
      */
     @Test
-    void testDeleteContactById() {
+    public void testDeleteContactById() {
+        // yet to be tested
     }
 
     /**
      * Test update contact by id.
      */
     @Test
-    void testUpdateContactById() {
+    public void testUpdateContactById() {
+        // yet to be tested
     }
 }
