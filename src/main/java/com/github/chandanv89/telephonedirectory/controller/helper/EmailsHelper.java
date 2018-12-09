@@ -120,7 +120,38 @@ public class EmailsHelper implements IEmails {
 
     @Override
     public ApiResponse updateEmail(String id, Email email) {
-        return null;
+        ApiResponse response = new ApiResponse();
+
+        try {
+            if (StringUtils.isBlank(id) || isIdEmailId(id)) {
+                response.setStatus(HttpStatus.BAD_REQUEST);
+                response.setBody("Please specify the id (not the email ID) of the email to update");
+                return response;
+            } else if (email != null && StringUtils.isBlank(email.getId())) {
+                LOGGER.info("Setting the email's id to {}", id);
+                email.setId(id);
+            }
+
+            if (email == null || StringUtils.isBlank(email.getEmailId())
+                    || StringUtils.isBlank(email.getParentContactId())) {
+                response.setBody("Invalid email details! Please check if the id, email id or the parent contact ids are blank!");
+                response.setStatus(HttpStatus.BAD_REQUEST);
+                return response;
+            }
+
+            if (service.updateEmail(email)) {
+                response.setStatus(HttpStatus.OK);
+                response.setBody("Updated successfully!");
+            } else {
+                response.setStatus(HttpStatus.NOT_MODIFIED);
+                response.setBody("Unable to update the record!");
+            }
+        } catch (Exception e) {
+            response.setBody(getExceptionMsg(e));
+            response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        return response;
     }
 
     @Override
@@ -136,5 +167,14 @@ public class EmailsHelper implements IEmails {
     private String getExceptionMsg(final Exception e) {
         LOGGER.error(e);
         return "Please check logs for more details on the error: " + e.getMessage();
+    }
+
+    private boolean isIdEmailId(String id) {
+        if (StringUtils.isNotBlank(id)) {
+            // ^[\w-]+(?:\.[\w-]+)*@(?:[\w-]+\.)+[a-zA-Z]{2,7}$
+            return id.matches("^[\\w-]+(?:\\.[\\w-]+)*@(?:[\\w-]+\\.)+[a-zA-Z]{2,7}$");
+        } else {
+            return false;
+        }
     }
 }

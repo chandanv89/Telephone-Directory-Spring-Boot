@@ -1,0 +1,72 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.github.chandanv89.telephonedirectory.persistance.mapper.ContactsMapper">
+    <resultMap id="contact" type="com.github.chandanv89.telephonedirectory.model.Contact">
+        <result property="id"        column="ID"         jdbcType="VARCHAR"/>
+        <result property="fullName"  column="FULL_NAME"  jdbcType="VARCHAR"/>
+        <result property="firstName" column="FIRST_NAME" jdbcType="VARCHAR"/>
+        <result property="lastName"  column="LAST_NAME"  jdbcType="VARCHAR"/>
+        <result property="isDeleted" column="DELETED"    jdbcType="CHAR"/>
+        <result property="createdOn" column="CRE_DT"     jdbcType="TIMESTAMP"/>
+        <result property="updatedOn" column="UPD_DT"     jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <select id="getAllContacts" resultMap="contact" resultType="com.github.chandanv89.telephonedirectory.model.Contact">
+        SELECT ID, FULL_NAME, FIRST_NAME, LAST_NAME, DELETED, CRE_DT, UPD_DT
+        FROM CONTACTS
+        WHERE DELETED = 'N'
+    </select>
+
+    <select id="getContactById" resultMap="contact" resultType="com.github.chandanv89.telephonedirectory.model.Contact">
+        SELECT ID, FULL_NAME, FIRST_NAME, LAST_NAME, DELETED, CRE_DT, UPD_DT
+        FROM CONTACTS
+        WHERE ID=#{id}
+        AND DELETED = 'N'
+    </select>
+
+    <insert id="addContact" parameterType="map" useGeneratedKeys="true">
+        INSERT INTO CONTACTS(ID, FULL_NAME, FIRST_NAME, LAST_NAME)
+        VALUES(#{contact.id}, #{contact.fullName}, #{contact.firstName}, #{contact.lastName})
+    </insert>
+
+    <!--<insert id="addContacts" parameterType="java.util.List">
+        INSERT ALL
+        <foreach collection="contacts" item="c" index="index">
+            INTO CONTACTS (FULL_NAME, FIRST_NAME, LAST_NAME)
+            VALUES (#{c.fullName},#{c.firstName}, #{c.lastName})
+        </foreach>
+        SELECT * FROM dual
+    </insert>-->
+
+    <insert id="addContacts" parameterType="java.util.List">
+        INSERT INTO CONTACTS (ID, FULL_NAME, FIRST_NAME, LAST_NAME) VALUES
+        <foreach collection="list" item="c" index="index" open="(" separator="),(" close=")">
+            #{c.id},
+            #{c.fullName},
+            #{c.firstName},
+            #{c.lastName}
+        </foreach>
+    </insert>
+
+    <delete id="deleteContactById" parameterType="String">
+        DELETE FROM CONTACTS
+        WHERE ID = #{id}
+    </delete>
+
+    <update id="markContactAsDeleted" parameterType="String">
+        UPDATE CONTACTS SET DELETED = 'Y'
+        WHERE ID=#{id}
+    </update>
+
+    <update id="updateContactById" parameterType="map">
+        UPDATE CONTACTS
+        SET FULL_NAME = #{contact.fullName},
+        FIRST_NAME = #{contact.firstName},
+        LAST_NAME = #{contact.lastName},
+        UPD_DT = CURRENT_TIMESTAMP
+        WHERE ID = #{contact.id}
+        AND DELETED = 'N'
+    </update>
+
+</mapper>

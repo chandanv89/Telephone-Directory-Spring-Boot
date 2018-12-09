@@ -8,6 +8,7 @@ import com.github.chandanv89.telephonedirectory.persistance.ContactNumbersDataSe
 import com.github.chandanv89.telephonedirectory.persistance.ContactsDataService;
 import com.github.chandanv89.telephonedirectory.persistance.EmailDataService;
 import com.github.chandanv89.telephonedirectory.utility.Guid;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,6 +18,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.github.chandanv89.telephonedirectory.model.ResponseMessages.DCH_NO_CONTACTS_FOUND;
 
 /**
  * The type IDirectory controller helper.
@@ -45,17 +48,17 @@ public class DirectoryControllerHelper {
         try {
             List<Contact> contacts = contactsDataService.getAllContacts();
 
-            if (contacts != null && contacts.size() > 0) {
-                contacts.forEach(i -> {
-                    i.setContactNumbers(contactNumbersDataService.getContactNumbersByContactId(i.getId()));
-                    i.setEmails(emailDataService.getEmailsByContactId(i.getId()));
+            if (CollectionUtils.isNotEmpty(contacts)) {
+                contacts.forEach(c -> {
+                    c.setContactNumbers(contactNumbersDataService.getContactNumbersByContactId(c.getId()));
+                    c.setEmails(emailDataService.getEmailsByContactId(c.getId()));
                 });
 
                 response.setBody(contacts);
                 response.setStatus(HttpStatus.OK);
             } else {
                 response.setStatus(HttpStatus.NOT_FOUND);
-                response.setBody("No contacts found in the directory!");
+                response.setBody(DCH_NO_CONTACTS_FOUND);
             }
         } catch (Exception e) {
             response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -230,11 +233,13 @@ public class DirectoryControllerHelper {
         boolean isContactNumsEmpty = false;
         boolean isEmailsEmpty = false;
 
-        if (contactNumbers == null || contactNumbers.size() == 0)
+        if (CollectionUtils.isEmpty(contactNumbers)) {
             isContactNumsEmpty = true;
+        }
 
-        if (emails == null || emails.size() == 0)
+        if (CollectionUtils.isEmpty(emails)) {
             isEmailsEmpty = true;
+        }
 
         if (isContactNumsEmpty && isEmailsEmpty) {
             String message = "Missing both contact number and emails information. Nothing to add!";
@@ -252,7 +257,7 @@ public class DirectoryControllerHelper {
         List<ApiResponse> responses = new ArrayList<>();
 
         try {
-            if (contacts == null || contacts.size() == 0) {
+            if (CollectionUtils.isEmpty(contacts)) {
                 response.setStatus(HttpStatus.BAD_REQUEST);
                 response.setBody("Expected a list of contacts to add!");
 
