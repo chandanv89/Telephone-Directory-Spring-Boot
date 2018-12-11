@@ -1,114 +1,83 @@
 package com.github.chandanv89.telephonedirectory.controller;
 
+import com.github.chandanv89.telephonedirectory.controller.contract.IDirectory;
 import com.github.chandanv89.telephonedirectory.controller.helper.DirectoryControllerHelper;
 import com.github.chandanv89.telephonedirectory.model.ApiResponse;
 import com.github.chandanv89.telephonedirectory.model.Contact;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The type Directory controller.
+ * The type IDirectory controller.
  */
+@Api(value = "The directory API",
+        produces = "application/json",
+        consumes = "application/json",
+        tags = {"directory", "telephone-directory"})
 @RestController
 @RequestMapping(
         path = "/contacts",
         produces = "application/json"
 )
-public class DirectoryController implements Directory {
-    private static final Logger LOGGER = LogManager.getLogger("DirectoryController");
-
+public class DirectoryController implements IDirectory {
     @Autowired
     private DirectoryControllerHelper helper;
 
-    @GetMapping
+    @ApiOperation(value = "/contacts",
+            response = ApiResponse.class,
+            produces = "application/jason",
+            httpMethod = "GET",
+            notes = "fetch all the contacts from the directory.")
+    @GetMapping(path = "/", produces = "application/json", name = "getAllContacts")
     public ApiResponse getAllContacts() {
-        ApiResponse response = new ApiResponse();
-
-        //LOGGER.info(">>> Fetching all the contacts...");
-
-        try {
-            response = helper.getAllContacts();
-            //LOGGER.info("Done. ");
-        } catch (Exception e) {
-            LOGGER.error(e);
-            response.setStatus(HttpStatus.NOT_FOUND);
-            response.setBody(new ArrayList<>());
-            //LOGGER.info("FAILED!", response);
-        }
-
-        return response;
+        return helper.getAllContacts();
     }
 
+    @ApiOperation(value = "/contacts/{CONTACT_ID}",
+            response = ApiResponse.class,
+            produces = "application/jason",
+            httpMethod = "GET",
+            notes = "fetch a contact for the given CONTACT_ID.")
     @GetMapping(path = "{id}", produces = "application/json")
     public ApiResponse getContactById(@PathVariable String id) {
-        ApiResponse response = new ApiResponse();
-
-        //LOGGER.info(">>> Fetching contact for id={}", id);
-
-        try {
-            response = helper.getContactById(id);
-            //LOGGER.info("Done. ", response);
-        } catch (Exception e) {
-            LOGGER.error(e);
-            response.setStatus(HttpStatus.NOT_FOUND);
-            response.setBody(null);
-            //LOGGER.info("FAILED!", response);
-        }
-
-        return response;
+        return helper.getContactById(id);
     }
 
+    @ApiOperation(value = "/contacts/add",
+            response = ApiResponse.class,
+            consumes = "Contact.class; application/jason",
+            produces = "application/jason",
+            httpMethod = "POST",
+            notes = "Create a new contact in the directory.")
     @PostMapping(path = "add", produces = "application/json")
     public ApiResponse addContact(@RequestBody Contact contact) {
-        ApiResponse response = new ApiResponse();
-
-        try {
-            //LOGGER.info(">>> Adding new contact: ", contact);
-            response = helper.addContact(contact);
-        } catch (Exception e) {
-            LOGGER.error(e);
-            response.setStatus(HttpStatus.NOT_FOUND);
-            response.setBody(new ArrayList<>());
-        }
-
-        return response;
+        return helper.addContact(contact);
     }
 
+    /**
+     * Add contacts api response.
+     *
+     * @param contacts the contacts
+     * @return the api response
+     */
+    @ApiOperation(value = "/contacts/add",
+            response = ApiResponse.class,
+            produces = "List<Contact>; application/jason",
+            httpMethod = "POST",
+            notes = "Create multiple contacts in the directory.")
     @PostMapping(produces = "application/json")
     public ApiResponse addContacts(@RequestBody List<Contact> contacts) {
-        ApiResponse response = new ApiResponse();
-
-        try {
-            //LOGGER.info(">>> Adding new contacts: ", contacts);
-            response = helper.addContacts(contacts);
-        } catch (Exception e) {
-            LOGGER.error(e);
-            response.setStatus(HttpStatus.NOT_FOUND);
-            response.setBody(new ArrayList<>());
-        }
-
-        return response;
+        return helper.addContacts(contacts);
     }
 
     @DeleteMapping(path = "{id}", produces = "application/json")
     public ApiResponse deleteContactById(@PathVariable String id) {
-        ApiResponse response = new ApiResponse();
-
-        try {
-            response = helper.deleteContactById(id);
-        } catch (Exception e) {
-            LOGGER.error(e);
-            response.setStatus(HttpStatus.NOT_FOUND);
-            response.setBody(new ArrayList<>());
-        }
-
-        return response;
+        return helper.deleteContactById(id);
     }
 
     @PutMapping(path = "{id}")

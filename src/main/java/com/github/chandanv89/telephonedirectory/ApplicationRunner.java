@@ -7,8 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
-
-import java.util.Arrays;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * The type Application runner.
@@ -16,6 +15,7 @@ import java.util.Arrays;
 @Configuration
 @ImportResource({"classpath*:appContext.xml"})
 @SpringBootApplication
+@EnableSwagger2
 public class ApplicationRunner {
     private static final Logger LOGGER = LogManager.getLogger("ApplicationRunner");
 

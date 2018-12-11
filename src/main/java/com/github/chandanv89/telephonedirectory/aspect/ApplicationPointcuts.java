@@ -74,7 +74,7 @@ public class ApplicationPointcuts {
         Object result = joinPoint.proceed();
 
         LOGGER.debug("$$$ Time Taken by {} is {} ms. Returned: {}",
-                joinPoint.toShortString(), (System.currentTimeMillis() - startTime));
+                joinPoint.toShortString(), (System.currentTimeMillis() - startTime), result);
 
         return result;
     }

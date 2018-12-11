@@ -14,20 +14,20 @@
     <util:properties id="prop" location="classpath*:/application.properties"/>
 
     <context:annotation-config/>
+    <context:component-scan base-package="com.github.chandanv89.telephonedirectory.controller.helper"/>
     <context:component-scan base-package="com.github.chandanv89.telephonedirectory.persistance"/>
 
     <bean id="appDataSource" destroy-method="close"
           class="org.apache.commons.dbcp2.BasicDataSource">
         <property name="driverClassName" value="#{prop['db.driver']}"/>
-        <property name="url" value="#{prop['db.jdbcurl']}"/>
-        <property name="username" value="#{prop['db.username']}"/>
-        <property name="password" value="#{prop['db.password']}"/>
-        <property name="initialSize" value="3"/>
+        <property name="url"             value="#{prop['db.jdbcurl']}"/>
+        <property name="username"        value="#{prop['db.username']}"/>
+        <property name="password"        value="#{prop['db.password']}"/>
+        <property name="initialSize"     value="3"/>
     </bean>
 
-    <bean id="sqlSessionFactory"
-          class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="appDataSource"/>
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource"     ref="appDataSource"/>
         <property name="configLocation" value="classpath:config-mybatis.xml"/>
     </bean>
 

@@ -1,0 +1,9 @@
+com/github/chandanv89/telephonedirectory/model/TestContactNumber.class
+com/github/chandanv89/telephonedirectory/controller/helper/TestDirectoryControllerHelper.class
+com/github/chandanv89/telephonedirectory/utility/TestGuid.class
+com/github/chandanv89/telephonedirectory/model/TestEmail.class
+com/github/chandanv89/telephonedirectory/model/TestContact.class
+com/github/chandanv89/telephonedirectory/persistance/TestContactsDataService.class
+com/github/chandanv89/telephonedirectory/model/TestApiResponse.class
+com/github/chandanv89/telephonedirectory/persistance/TestEmailDataService.class
+com/github/chandanv89/telephonedirectory/persistance/TestContactNumbersDataService.class

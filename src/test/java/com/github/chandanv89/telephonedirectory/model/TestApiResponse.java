@@ -5,7 +5,13 @@ import pl.pojo.tester.api.assertion.Method;
 
 import static pl.pojo.tester.api.assertion.Assertions.assertPojoMethodsFor;
 
+/**
+ * The type Test api response.
+ */
 class TestApiResponse {
+    /**
+     * Pojo tester.
+     */
     @Test
     public void pojoTester() {
         assertPojoMethodsFor(ApiResponse.class)
