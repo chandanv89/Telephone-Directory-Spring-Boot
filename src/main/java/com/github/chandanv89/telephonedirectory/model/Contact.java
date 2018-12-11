@@ -2,6 +2,7 @@ package com.github.chandanv89.telephonedirectory.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.annotations.ApiModel;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.UUID;
 /**
  * The type Contact.
  */
+@ApiModel
 public class Contact {
     private static final long serialVersionUID = 4492014110145565010L;
 
@@ -65,6 +67,11 @@ public class Contact {
         setNameComponents();
     }
 
+    /**
+     * Instantiates a new Contact.
+     *
+     * @param contact the contact
+     */
     public Contact(Contact contact){
         this.firstName = contact.getFirstName();
         this.lastName = contact.getLastName();
@@ -238,21 +245,6 @@ public class Contact {
         this.isDeleted = isDeleted;
     }
 
-    @Override
-    public String toString() {
-        return "Contact{" +
-                "id=" + id +
-                ", fullName='" + fullName + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", contactNumbers=" + contactNumbers +
-                ", emails=" + emails +
-                ", createdOn='" + createdOn + '\'' +
-                ", updatedOn='" + updatedOn + '\'' +
-                ", isDeleted='" + isDeleted + '\'' +
-                '}';
-    }
-
     private void setNameComponents() {
         String[] names;
 
@@ -275,5 +267,20 @@ public class Contact {
             this.lastName = names[0].trim();
         if (this.firstName == null)
             this.firstName = names[1].trim();
+    }
+
+    @Override
+    public String toString() {
+        return "Contact{" +
+                "id=" + id +
+                ", fullName='" + fullName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", contactNumbers=" + contactNumbers +
+                ", emails=" + emails +
+                ", createdOn='" + createdOn + '\'' +
+                ", updatedOn='" + updatedOn + '\'' +
+                ", isDeleted='" + isDeleted + '\'' +
+                '}';
     }
 }

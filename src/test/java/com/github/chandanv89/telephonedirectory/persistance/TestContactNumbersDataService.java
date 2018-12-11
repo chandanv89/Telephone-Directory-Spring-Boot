@@ -18,7 +18,7 @@ import static org.mockito.Mockito.*;
 /**
  * The type Test contact numbers data service.
  */
-class TestContactNumbersDataService {
+public class TestContactNumbersDataService {
     @InjectMocks
     private ContactNumbersDataService service;
 
@@ -29,7 +29,7 @@ class TestContactNumbersDataService {
      * Init.
      */
     @Before
-    void init() {
+    private void init() {
         MockitoAnnotations.initMocks(this);
     }
 
@@ -37,7 +37,7 @@ class TestContactNumbersDataService {
      * Gets contact numbers by contact id.
      */
     @Test
-    void getContactNumbersByContactId() {
+    public void getContactNumbersByContactId() {
         when(mapper.getContactNumbersByContactId(anyString()))
                 .thenReturn(getContactNumbers());
 
@@ -53,7 +53,7 @@ class TestContactNumbersDataService {
      * Gets all contact numbers.
      */
     @Test
-    void getAllContactNumbers() {
+    public void getAllContactNumbers() {
         when(mapper.getAllContactNumbers()).thenReturn(getContactNumbers());
 
         List<ContactNumber> contactNumbers = service.getAllContactNumbers();
@@ -68,7 +68,7 @@ class TestContactNumbersDataService {
      * Add contact number.
      */
     @Test
-    void addContactNumber() {
+    public void addContactNumber() {
 
         doAnswer(ans -> true).when(mapper.addContactNumber(any(ContactNumber.class)));
 
@@ -83,7 +83,7 @@ class TestContactNumbersDataService {
      * Add contact numbers.
      */
     @Test
-    void addContactNumbers() {
+    public void addContactNumbers() {
         doAnswer(ans -> true).when(mapper.addContactNumbers(anyList()));
 
         int count = service.addContactNumbers(getContactNumbers());
@@ -97,21 +97,24 @@ class TestContactNumbersDataService {
      * Update contact number.
      */
     @Test
-    void updateContactNumber() {
+    public void updateContactNumber() {
+        // yet to be tested
     }
 
     /**
      * Delete contact number.
      */
     @Test
-    void deleteContactNumber() {
+    public void deleteContactNumber() {
+        // yet to be tested
     }
 
     /**
      * Delete contact numbers by contact id.
      */
     @Test
-    void deleteContactNumbersByContactId() {
+    public void deleteContactNumbersByContactId() {
+        // yet to be tested
     }
 
     private List<ContactNumber> getContactNumbers() {
