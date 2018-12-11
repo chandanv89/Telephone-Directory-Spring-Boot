@@ -17,6 +17,9 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * The type Emails helper.
+ */
 @Component
 public class EmailsHelper implements IEmails {
     private static final Logger LOGGER = LogManager.getLogger(EmailsHelper.class);

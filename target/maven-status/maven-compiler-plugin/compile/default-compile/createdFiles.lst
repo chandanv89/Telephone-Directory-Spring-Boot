@@ -15,6 +15,7 @@ com/github/chandanv89/telephonedirectory/controller/contract/ISearch.class
 com/github/chandanv89/telephonedirectory/model/ApiResponse.class
 com/github/chandanv89/telephonedirectory/model/Contact.class
 com/github/chandanv89/telephonedirectory/controller/EmailsController.class
+com/github/chandanv89/telephonedirectory/model/ResponseMessages.class
 com/github/chandanv89/telephonedirectory/persistance/EmailDataService.class
 com/github/chandanv89/telephonedirectory/model/Email.class
 com/github/chandanv89/telephonedirectory/controller/contract/IContactNumbers.class

@@ -59,6 +59,12 @@ public class DirectoryController implements IDirectory {
         return helper.addContact(contact);
     }
 
+    /**
+     * Add contacts api response.
+     *
+     * @param contacts the contacts
+     * @return the api response
+     */
     @ApiOperation(value = "/contacts/add",
             response = ApiResponse.class,
             produces = "List<Contact>; application/jason",

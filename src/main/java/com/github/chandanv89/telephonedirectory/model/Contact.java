@@ -67,6 +67,11 @@ public class Contact {
         setNameComponents();
     }
 
+    /**
+     * Instantiates a new Contact.
+     *
+     * @param contact the contact
+     */
     public Contact(Contact contact){
         this.firstName = contact.getFirstName();
         this.lastName = contact.getLastName();

@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * The type Emails controller.
+ */
 @Api(value = "Access and manipulate Emails",
         produces = "application/json",
         consumes = "application/json",

@@ -15,6 +15,9 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.*;
 
+/**
+ * The type Test email data service.
+ */
 public class TestEmailDataService {
     @InjectMocks
     private EmailDataService dataService;
@@ -22,11 +25,17 @@ public class TestEmailDataService {
     @Mock
     private EmailsMapper mapper;
 
+    /**
+     * Inti.
+     */
     @Before
     public void inti() {
         MockitoAnnotations.initMocks(this);
     }
 
+    /**
+     * Test add emails method when a valid list is passed.
+     */
     @Test
     public void testAddEmailsMethodWhenAValidListIsPassed() {
         List<Email> emails = getEmails();
@@ -39,6 +48,9 @@ public class TestEmailDataService {
         verify(mapper, atLeastOnce()).addEmails(emails);
     }
 
+    /**
+     * Test add emails method when an empty list is passed.
+     */
     @Test
     public void testAddEmailsMethodWhenAnEmptyListIsPassed() {
         List<Email> emails = new ArrayList<>();

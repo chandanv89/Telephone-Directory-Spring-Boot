@@ -11,6 +11,7 @@
 /home/cdn/Code/github/Telephone-Directory-Spring-Boot/src/main/java/com/github/chandanv89/telephonedirectory/persistance/mapper/EmailsMapper.java
 /home/cdn/Code/github/Telephone-Directory-Spring-Boot/src/main/java/com/github/chandanv89/telephonedirectory/utility/Guid.java
 /home/cdn/Code/github/Telephone-Directory-Spring-Boot/src/main/java/com/github/chandanv89/telephonedirectory/persistance/EmailDataService.java
+/home/cdn/Code/github/Telephone-Directory-Spring-Boot/src/main/java/com/github/chandanv89/telephonedirectory/model/ResponseMessages.java
 /home/cdn/Code/github/Telephone-Directory-Spring-Boot/src/main/java/com/github/chandanv89/telephonedirectory/model/ApiResponse.java
 /home/cdn/Code/github/Telephone-Directory-Spring-Boot/src/main/java/com/github/chandanv89/telephonedirectory/controller/contract/IDirectory.java
 /home/cdn/Code/github/Telephone-Directory-Spring-Boot/src/main/java/com/github/chandanv89/telephonedirectory/persistance/mapper/ContactNumbersMapper.java

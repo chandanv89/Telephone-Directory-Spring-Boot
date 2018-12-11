@@ -252,6 +252,12 @@ public class DirectoryControllerHelper {
         return null;
     }
 
+    /**
+     * Add contacts api response.
+     *
+     * @param contacts the contacts
+     * @return the api response
+     */
     public ApiResponse addContacts(List<Contact> contacts) {
         ApiResponse response = new ApiResponse();
         List<ApiResponse> responses = new ArrayList<>();

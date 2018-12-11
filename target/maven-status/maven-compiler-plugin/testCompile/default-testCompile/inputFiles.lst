@@ -3,6 +3,7 @@
 /home/cdn/Code/github/Telephone-Directory-Spring-Boot/src/test/java/com/github/chandanv89/telephonedirectory/persistance/TestEmailDataService.java
 /home/cdn/Code/github/Telephone-Directory-Spring-Boot/src/test/java/com/github/chandanv89/telephonedirectory/utility/TestGuid.java
 /home/cdn/Code/github/Telephone-Directory-Spring-Boot/src/test/java/com/github/chandanv89/telephonedirectory/persistance/TestContactsDataService.java
+/home/cdn/Code/github/Telephone-Directory-Spring-Boot/src/test/java/com/github/chandanv89/telephonedirectory/controller/helper/TestDirectoryControllerHelper.java
 /home/cdn/Code/github/Telephone-Directory-Spring-Boot/src/test/java/com/github/chandanv89/telephonedirectory/model/TestEmail.java
 /home/cdn/Code/github/Telephone-Directory-Spring-Boot/src/test/java/com/github/chandanv89/telephonedirectory/persistance/TestContactNumbersDataService.java
 /home/cdn/Code/github/Telephone-Directory-Spring-Boot/src/test/java/com/github/chandanv89/telephonedirectory/model/TestApiResponse.java

@@ -20,6 +20,9 @@ import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
+/**
+ * The type Test directory controller helper.
+ */
 public class TestDirectoryControllerHelper {
     @InjectMocks
     private DirectoryControllerHelper helper;
@@ -33,11 +36,17 @@ public class TestDirectoryControllerHelper {
     @Mock
     private EmailDataService emailDataService;
 
+    /**
+     * Init.
+     */
     @Before
     public void init() {
         MockitoAnnotations.initMocks(this);
     }
 
+    /**
+     * Test get all contacts method when no contacts found in the directory.
+     */
     @Test
     public void testGetAllContactsMethodWhenNoContactsFoundInTheDirectory() {
         when(contactsDataService.getAllContacts()).thenReturn(new ArrayList<>());
@@ -49,6 +58,9 @@ public class TestDirectoryControllerHelper {
         assertEquals(DCH_NO_CONTACTS_FOUND, response.getBody());
     }
 
+    /**
+     * Test get all contacts method when contacts fetched successfully.
+     */
     @Test
     public void testGetAllContactsMethodWhenContactsFetchedSuccessfully() {
         when(contactsDataService.getAllContacts()).thenReturn(getContacts());
@@ -61,6 +73,9 @@ public class TestDirectoryControllerHelper {
         assertEquals(HttpStatus.OK, response.getStatus());
     }
 
+    /**
+     * Test get all contacts method when an exception occurred.
+     */
     @Test
     public void testGetAllContactsMethodWhenAnExceptionOccurred() {
         when(contactsDataService.getAllContacts()).thenThrow(new RuntimeException("Testing"));
