@@ -1,6 +1,7 @@
 # Telephone Directory using Spring Boot
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/c12786f379504e96aff5d51fba18b6ff)](https://app.codacy.com/app/chandanv89/Telephone-Directory-Spring-Boot?utm_source=github.com&utm_medium=referral&utm_content=chandanv89/Telephone-Directory-Spring-Boot&utm_campaign=Badge_Grade_Settings)
+[![codecov](https://codecov.io/gh/chandanv89/Telephone-Directory-Spring-Boot/branch/develop.2018.12/graph/badge.svg)](https://codecov.io/gh/chandanv89/Telephone-Directory-Spring-Boot)
 [![Build Status](https://travis-ci.org/chandanv89/Telephone-Directory-Spring-Boot.svg?version=latest)](https://travis-ci.org/chandanv89/Telephone-Directory-Spring-Boot)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=com.github.chandanv89%3Atelephone-directory-spring&metric=alert_status)](https://sonarcloud.io/api/project_badges/measure?project=com.github.chandanv89%3Atelephone-directory-spring&metric=alert_status)
 [![BCH compliance](https://bettercodehub.com/edge/badge/chandanv89/Telephone-Directory-Spring-Boot?version=latest)](https://bettercodehub.com/results/chandanv89/Telephone-Directory-Spring-Boot)
