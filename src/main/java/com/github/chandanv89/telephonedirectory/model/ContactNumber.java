@@ -1,41 +1,21 @@
 package com.github.chandanv89.telephonedirectory.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.github.chandanv89.telephonedirectory.utility.Utilities;
 
 /**
  * The type Contact number.
  */
-public class ContactNumber {
-    @JsonProperty("id")
-    private String id;
-
+public class ContactNumber extends IContact {
     @JsonProperty("number")
     private String number;
-
-    @JsonIgnore
-    @JsonProperty("category")
-    private ContactCategory category;
-
-    @JsonIgnore
-    @JsonProperty("isPrimary")
-    private boolean isPrimary;
-
-    @JsonIgnore
-    @JsonProperty("createdOn")
-    private String createdOn;
-
-    @JsonIgnore
-    @JsonProperty("updatedOn")
-    private String updatedOn;
-    private String parentContactId;
 
     /**
      * Instantiates a new Contact number.
      */
     public ContactNumber() {
-        this.category = ContactCategory.PERSONAL;
-        this.isPrimary = false;
+        super.category = ContactCategory.PERSONAL;
+        super.isPrimary = false;
     }
 
     /**
@@ -45,8 +25,8 @@ public class ContactNumber {
      */
     public ContactNumber(String number) {
         this.number = number;
-        this.category = ContactCategory.PERSONAL;
-        this.isPrimary = false;
+        super.category = ContactCategory.PERSONAL;
+        super.isPrimary = false;
     }
 
     /**
@@ -58,8 +38,8 @@ public class ContactNumber {
      */
     public ContactNumber(String number, ContactCategory category, boolean isPrimary) {
         this.number = number;
-        this.category = category;
-        this.isPrimary = isPrimary;
+        super.category = category;
+        super.isPrimary = isPrimary;
     }
 
     /**
@@ -71,8 +51,8 @@ public class ContactNumber {
      */
     public ContactNumber(String number, String category, boolean isPrimary) {
         this.number = number;
-        this.isPrimary = isPrimary;
-        this.category = ContactCategory.OTHERS.fromString(category.toUpperCase());
+        super.isPrimary = isPrimary;
+        super.category = ContactCategory.fromString(category.toUpperCase());
 
     }
 
@@ -91,7 +71,7 @@ public class ContactNumber {
      * @param id the id
      */
     public void setId(String id) {
-        this.id = id;
+        super.id = id;
     }
 
     /**
@@ -154,7 +134,7 @@ public class ContactNumber {
      * @param createdOn the created on
      */
     public void setCreatedOn(String createdOn) {
-        this.createdOn = createdOn;
+        super.createdOn = createdOn;
     }
 
     /**
@@ -172,7 +152,7 @@ public class ContactNumber {
      * @param updatedOn the updated on
      */
     public void setUpdatedOn(String updatedOn) {
-        this.updatedOn = updatedOn;
+        super.updatedOn = updatedOn;
     }
 
     /**
@@ -181,7 +161,7 @@ public class ContactNumber {
      * @param category the category
      */
     public void setCategory(String category) {
-        this.category = ContactCategory.fromString(category);
+        super.category = ContactCategory.fromString(category);
     }
 
     /**
@@ -190,7 +170,7 @@ public class ContactNumber {
      * @param category the category
      */
     public void setCategory(ContactCategory category) {
-        this.category = category;
+        super.category = category;
     }
 
     /**
@@ -199,7 +179,7 @@ public class ContactNumber {
      * @param parentContactId the parent contact id
      */
     public void setParentContactId(String parentContactId) {
-        this.parentContactId = parentContactId;
+        super.parentContactId = parentContactId;
     }
 
     /**
@@ -213,14 +193,6 @@ public class ContactNumber {
 
     @Override
     public String toString() {
-        return "ContactNumber{" +
-                "id='" + id + '\'' +
-                ", number='" + number + '\'' +
-                ", category=" + category +
-                ", isPrimary=" + isPrimary +
-                ", parentContactId='" + parentContactId + '\'' +
-                ", createdOn='" + createdOn + '\'' +
-                ", updatedOn='" + updatedOn + '\'' +
-                '}';
+        return Utilities.toString(this);
     }
 }

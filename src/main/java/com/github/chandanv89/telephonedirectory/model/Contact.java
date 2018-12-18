@@ -2,8 +2,11 @@ package com.github.chandanv89.telephonedirectory.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.annotations.ApiModel;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.IndexDirection;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,21 +15,24 @@ import java.util.UUID;
 /**
  * The type Contact.
  */
-@ApiModel
+@Document(collection = "Contacts")
 public class Contact {
     private static final long serialVersionUID = 4492014110145565010L;
 
     @JsonIgnore
     @JsonProperty("id")
+    @Id
     private String id;
 
     @JsonProperty("fullName")
     private String fullName;
 
     @JsonProperty("firstName")
+    @Indexed(direction = IndexDirection.ASCENDING)
     private String firstName;
 
     @JsonProperty("lastName")
+    @Indexed(direction = IndexDirection.ASCENDING)
     private String lastName;
 
     @JsonProperty("contactNumbers")

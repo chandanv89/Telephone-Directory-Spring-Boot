@@ -1,41 +1,21 @@
 package com.github.chandanv89.telephonedirectory.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.github.chandanv89.telephonedirectory.utility.Utilities;
 
 /**
  * The type Email.
  */
-public class Email {
-    @JsonProperty("id")
-    private String id;
-
+public class Email extends IContact {
     @JsonProperty("emailId")
     private String emailId;
-
-    @JsonIgnore
-    @JsonProperty("category")
-    private ContactCategory category;
-
-    @JsonIgnore
-    @JsonProperty("isPrimary")
-    private boolean isPrimary;
-
-    @JsonIgnore
-    @JsonProperty("createdOn")
-    private String createdOn;
-
-    @JsonIgnore
-    @JsonProperty("updatedOn")
-    private String updatedOn;
-    private String parentContactId;
 
     /**
      * Instantiates a new Email.
      */
     public Email() {
-        this.category = ContactCategory.PERSONAL;
-        this.isPrimary = false;
+        super.category = ContactCategory.PERSONAL;
+        super.isPrimary = false;
     }
 
     /**
@@ -45,8 +25,8 @@ public class Email {
      */
     public Email(String emailId) {
         this.emailId = emailId;
-        this.category = ContactCategory.PERSONAL;
-        this.isPrimary = false;
+        super.category = ContactCategory.PERSONAL;
+        super.isPrimary = false;
     }
 
     /**
@@ -58,8 +38,8 @@ public class Email {
      */
     public Email(String emailId, ContactCategory category, boolean isPrimary) {
         this.emailId = emailId;
-        this.category = category;
-        this.isPrimary = isPrimary;
+        super.category = category;
+        super.isPrimary = isPrimary;
     }
 
     /**
@@ -71,8 +51,8 @@ public class Email {
      */
     public Email(String emailId, String category, boolean isPrimary) {
         this.emailId = emailId;
-        this.isPrimary = isPrimary;
-        this.category = ContactCategory.fromString(category);
+        super.isPrimary = isPrimary;
+        super.category = ContactCategory.fromString(category);
     }
 
     /**
@@ -108,7 +88,7 @@ public class Email {
      * @param id the id
      */
     public void setId(String id) {
-        this.id = id;
+        super.id = id;
     }
 
     /**
@@ -126,7 +106,7 @@ public class Email {
      * @param category the category
      */
     public void setCategory(ContactCategory category) {
-        this.category = category;
+        super.category = category;
     }
 
     /**
@@ -135,7 +115,7 @@ public class Email {
      * @param category the category
      */
     public void setCategory(String category) {
-        this.category = ContactCategory.fromString(category);
+        super.category = ContactCategory.fromString(category);
     }
 
     /**
@@ -171,7 +151,7 @@ public class Email {
      * @param createdOn the created on
      */
     public void setCreatedOn(String createdOn) {
-        this.createdOn = createdOn;
+        super.createdOn = createdOn;
     }
 
     /**
@@ -189,20 +169,7 @@ public class Email {
      * @param updatedOn the updated on
      */
     public void setUpdatedOn(String updatedOn) {
-        this.updatedOn = updatedOn;
-    }
-
-    @Override
-    public String toString() {
-        return "Email{" +
-                "id='" + id + '\'' +
-                ", emailId='" + emailId + '\'' +
-                ", category=" + category +
-                ", isPrimary=" + isPrimary +
-                ", parentContactId='" + parentContactId + '\'' +
-                ", createdOn='" + createdOn + '\'' +
-                ", updatedOn='" + updatedOn + '\'' +
-                '}';
+        super.updatedOn = updatedOn;
     }
 
     /**
@@ -211,7 +178,7 @@ public class Email {
      * @param parentContactId the parent contact id
      */
     public void setParentContactId(String parentContactId) {
-        this.parentContactId = parentContactId;
+        super.parentContactId = parentContactId;
     }
 
     /**
@@ -221,5 +188,10 @@ public class Email {
      */
     public String getParentContactId() {
         return parentContactId;
+    }
+
+    @Override
+    public String toString() {
+        return Utilities.toString(this);
     }
 }

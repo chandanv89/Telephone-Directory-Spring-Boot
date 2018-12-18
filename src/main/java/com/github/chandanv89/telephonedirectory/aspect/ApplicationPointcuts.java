@@ -6,12 +6,14 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Component;
 
 /**
  * The type Application pointcuts.
  */
 @Aspect
+@EnableAspectJAutoProxy
 @Configuration
 @Component
 public class ApplicationPointcuts {

@@ -1,9 +1,0 @@
-com.github.chandanv89.telephonedirectory
-com.github.chandanv89.telephonedirectory.aspect
-com.github.chandanv89.telephonedirectory.controller
-com.github.chandanv89.telephonedirectory.controller.contract
-com.github.chandanv89.telephonedirectory.controller.helper
-com.github.chandanv89.telephonedirectory.model
-com.github.chandanv89.telephonedirectory.persistance
-com.github.chandanv89.telephonedirectory.persistance.mapper
-com.github.chandanv89.telephonedirectory.utility
