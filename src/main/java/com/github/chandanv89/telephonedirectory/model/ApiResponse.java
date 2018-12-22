@@ -14,6 +14,24 @@ public class ApiResponse {
     private Object body;
 
     /**
+     * Instantiates a new Api response.
+     */
+    public ApiResponse() {
+        // default
+    }
+
+    /**
+     * Instantiates a new Api response.
+     *
+     * @param status the status
+     * @param body   the body
+     */
+    public ApiResponse(HttpStatus status, Object body) {
+        this.status = status;
+        this.body = body;
+    }
+
+    /**
      * Gets status.
      *
      * @return the status
@@ -51,9 +69,6 @@ public class ApiResponse {
 
     @Override
     public String toString() {
-        return "ApiResponse{" +
-                "status=" + status +
-                ", body=" + body +
-                '}';
+        return "{\"status\":" + status + ",\"body\":" + body + '}';
     }
 }

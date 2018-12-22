@@ -1,10 +1,10 @@
 package com.github.chandanv89.telephonedirectory.controller;
 
+import com.github.chandanv89.telephonedirectory.controller.helper.ContactsControllerHelper;
+import com.github.chandanv89.telephonedirectory.model.ApiResponse;
 import com.github.chandanv89.telephonedirectory.model.Contact;
-import com.github.chandanv89.telephonedirectory.repository.ContactsRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * The type Contacts controller.
@@ -12,16 +12,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/rest/contacts/")
 public class ContactsController {
-    private ContactsRepository repository;
 
-    /**
-     * Instantiates a new Contacts controller.
-     *
-     * @param repository the repository
-     */
-    public ContactsController(ContactsRepository repository) {
-        this.repository = repository;
-    }
+    @Autowired
+    private ContactsControllerHelper helper;
 
     /**
      * Gets all.
@@ -29,37 +22,51 @@ public class ContactsController {
      * @return the all
      */
     @GetMapping("/")
-    public List<Contact> getAll() {
-        return repository.findAll();
+    public ApiResponse getAll() {
+        return helper.getAll();
+    }
+
+    /**
+     * Gets by id.
+     *
+     * @param id the id
+     * @return the by id
+     */
+    @GetMapping("/{id}")
+    public ApiResponse getById(@PathVariable("id") String id) {
+        return helper.getById(id);
     }
 
     /**
      * Insert.
      *
      * @param contact the contact
+     * @return the api response
      */
     @PostMapping("/")
-    public void insert(@RequestBody Contact contact) {
-        repository.insert(contact);
+    public ApiResponse insert(@RequestBody Contact contact) {
+        return helper.insert(contact);
     }
 
     /**
      * Update.
      *
      * @param contact the contact
+     * @return the api response
      */
     @PutMapping
-    public void update(@RequestBody Contact contact) {
-        repository.save(contact);
+    public ApiResponse update(@RequestBody Contact contact) {
+        return helper.update(contact);
     }
 
     /**
      * Delete.
      *
      * @param id the id
+     * @return the api response
      */
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable("id") String id) {
-        repository.deleteById(id);
+    public ApiResponse delete(@PathVariable("id") String id) {
+        return helper.deleteById(id);
     }
 }
