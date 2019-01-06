@@ -2,6 +2,8 @@ package com.github.chandanv89.telephonedirectory.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.github.chandanv89.telephonedirectory.model.dto.ContactDTO;
+import com.github.chandanv89.telephonedirectory.utility.Utilities;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.IndexDirection;
@@ -65,6 +67,23 @@ public class Contact {
     /**
      * Instantiates a new Contact.
      *
+     * @param dto the dto
+     */
+    public Contact(ContactDTO dto) {
+        this.id = dto.getId();
+        this.fullName = dto.getFullName();
+        this.firstName = dto.getFirstName();
+        this.lastName = dto.getLastName();
+        this.contactNumbers = dto.getContactNumbers();
+        this.emails = dto.getEmails();
+        this.createdOn = dto.getCreatedOn();
+        this.updatedOn = dto.getUpdatedOn();
+        this.isDeleted = dto.getIsDeleted();
+    }
+
+    /**
+     * Instantiates a new Contact.
+     *
      * @param fullName the full name
      */
     public Contact(String fullName) {
@@ -78,7 +97,7 @@ public class Contact {
      *
      * @param contact the contact
      */
-    public Contact(Contact contact){
+    public Contact(Contact contact) {
         this.firstName = contact.getFirstName();
         this.lastName = contact.getLastName();
         this.fullName = contact.getFullName();
@@ -254,7 +273,7 @@ public class Contact {
     private void setNameComponents() {
         String[] names;
 
-        if(StringUtils.isBlank(fullName)) {
+        if (StringUtils.isBlank(fullName)) {
             this.firstName = this.lastName = null;
             return;
         }
@@ -277,16 +296,6 @@ public class Contact {
 
     @Override
     public String toString() {
-        return "Contact{" +
-                "id=" + id +
-                ", fullName='" + fullName + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", contactNumbers=" + contactNumbers +
-                ", emails=" + emails +
-                ", createdOn='" + createdOn + '\'' +
-                ", updatedOn='" + updatedOn + '\'' +
-                ", isDeleted='" + isDeleted + '\'' +
-                '}';
+        return Utilities.toString(this);
     }
 }

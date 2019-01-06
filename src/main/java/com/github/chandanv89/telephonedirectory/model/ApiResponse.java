@@ -1,12 +1,30 @@
 package com.github.chandanv89.telephonedirectory.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.github.chandanv89.telephonedirectory.utility.Utilities;
 import org.springframework.http.HttpStatus;
 
 /**
  * The type Api response.
  */
 public class ApiResponse {
+    /**
+     * The constant NO_CONTACT_FOUND.
+     */
+    public static final String NO_CONTACT_FOUND = "No contact found by the given id";
+    /**
+     * The constant N_CNUM_FOUND.
+     */
+    public static final String N_CNUM_FOUND = "{} contact numbers found for the id {}";
+    /**
+     * The constant NO_CNUM_FOUND.
+     */
+    public static final String NO_CNUM_FOUND = "No contact numbers found for the id {}";
+    /**
+     * The constant NO_EMAIL_FOUND.
+     */
+    public static final String NO_EMAIL_FOUND = "No emails found for the id {}";
+
     @JsonProperty("status")
     private HttpStatus status;
 
@@ -69,6 +87,6 @@ public class ApiResponse {
 
     @Override
     public String toString() {
-        return "{\"status\":" + status + ",\"body\":" + body + '}';
+        return Utilities.toString(this);
     }
 }

@@ -1,5 +1,7 @@
 package com.github.chandanv89.telephonedirectory.model;
 
+import com.github.chandanv89.telephonedirectory.utility.Utilities;
+
 /**
  * The type Application exception.
  */
@@ -62,7 +64,6 @@ public class ApplicationException {
 
     @Override
     public String toString() {
-        return "{\"exceptionMessage\":\"" + this.exceptionMessage + "\"," +
-                "\"exceptionType\":\"" + this.exceptionType + "\"}";
+        return Utilities.toString(this);
     }
 }

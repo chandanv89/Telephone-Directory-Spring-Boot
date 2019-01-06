@@ -2,7 +2,7 @@ package com.github.chandanv89.telephonedirectory.controller;
 
 import com.github.chandanv89.telephonedirectory.controller.helper.ContactsControllerHelper;
 import com.github.chandanv89.telephonedirectory.model.ApiResponse;
-import com.github.chandanv89.telephonedirectory.model.Contact;
+import com.github.chandanv89.telephonedirectory.model.dto.ContactDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,25 +38,47 @@ public class ContactsController {
     }
 
     /**
+     * Gets numbers for id.
+     *
+     * @param id the id
+     * @return the numbers for id
+     */
+    @GetMapping("/{id}/numbers")
+    public ApiResponse getNumbersForId(@PathVariable("id") String id) {
+        return helper.getNumbersForId(id);
+    }
+
+    /**
+     * Gets emails for id.
+     *
+     * @param id the id
+     * @return the emails for id
+     */
+    @GetMapping("/{id}/emails")
+    public ApiResponse getEmailsForId(@PathVariable("id") String id) {
+        return helper.getEmailsForId(id);
+    }
+
+    /**
      * Insert.
      *
-     * @param contact the contact
+     * @param contactDto the contact dto
      * @return the api response
      */
     @PostMapping("/")
-    public ApiResponse insert(@RequestBody Contact contact) {
-        return helper.insert(contact);
+    public ApiResponse insert(@RequestBody ContactDTO contactDto) {
+        return helper.insert(contactDto);
     }
 
     /**
      * Update.
      *
-     * @param contact the contact
+     * @param contactdto the contactdto
      * @return the api response
      */
     @PutMapping
-    public ApiResponse update(@RequestBody Contact contact) {
-        return helper.update(contact);
+    public ApiResponse update(@RequestBody ContactDTO contactdto) {
+        return helper.update(contactdto);
     }
 
     /**
