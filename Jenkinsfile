@@ -5,15 +5,21 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-		mvn clean compile package install -DskipTests=true
+		sh 'mvn clean compile package -DskipTests'
             }
         }
         stage('Test') {
             steps {
                 echo 'Testing..'
-		mvn test
+		sh 'mvn test'
             }
         }
+	stage('Install') {
+		steps {
+			echo 'Installing...'
+			sh 'mvn package install -DskipTests'
+		}
+	}
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
