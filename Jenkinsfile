@@ -1,7 +1,7 @@
 pipeline {
     agent any
 	options {
-		ansiColor('gnome-terminal')
+		ansiColor('xterm')
 	}
 
     stages {
