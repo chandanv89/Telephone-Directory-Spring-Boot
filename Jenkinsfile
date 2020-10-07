@@ -1,5 +1,8 @@
 pipeline {
     agent any
+	options {
+		ansiColor('gnome-terminal')
+	}
 
     stages {
         stage('Build') {
